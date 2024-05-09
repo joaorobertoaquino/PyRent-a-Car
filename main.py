@@ -4,6 +4,10 @@ import os
 ##### Projeto - Locadora de Carros - Versão 4 #####
 ###################################################
 
+
+
+# tetetetetetetetettetetetetetetet
+
 op_pric = ''
 while op_pric != '0':
   os.system('clear')
