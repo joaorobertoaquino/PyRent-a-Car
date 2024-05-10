@@ -5,20 +5,17 @@ import os
 ###################################################
 
 
-
-# tetetetetetetetettetetetetetetet
-
 op_pric = ''
 while op_pric != '0':
-  os.system('clear')
+  os.system("clear")
   print("############################################")
   print("######      Locadora de Carros        ######")
   print("############################################")
   print("#####      1 - Módulo Cliente          #####")
   print("#####      2 - Módulo Funcionários     #####")
   print("#####      3 - Módulo Veículos         #####")
-  print("#####      4 - Módulo Relatório        #####")
-  print("#####      5 - Módulo Reserva          #####")
+  print("#####      4 - Módulo Reserva          #####")
+  print("#####      5 - Módulo Relatório        #####")
   print("#####      6 - Módulo Informações      #####")
   print("#####      0 - Sair                    #####")
   op_pric = input("##### Escolha sua opção: ")
@@ -26,7 +23,7 @@ while op_pric != '0':
   if op_pric == '1':
     op_cliente = ''
     while op_cliente != '0':
-      os.system('clear')
+      os.system("clear")
       print()
       print("#############################################")
       print("#####    Você está no Módulo Cliente    #####")
@@ -41,7 +38,7 @@ while op_pric != '0':
       input("Tecle <ENTER> para continuar...")
           
       if op_cliente == '1':
-        os.system('clear')
+        os.system("clear")
         print()
         print("#############################################")
         print("#####        Cadastrar Cliente         #####")
@@ -59,7 +56,7 @@ while op_pric != '0':
         input("Tecle <ENTER> para continuar...")
 
       elif op_cliente == '2':
-        os.system('clear')
+        os.system("clear")
         print()
         print("############################################")
         print("#####      Exibe Dados do Cliente      #####")
@@ -73,7 +70,7 @@ while op_pric != '0':
         input("Tecle <ENTER> para continuar...")
 
       elif op_cliente == '3':
-        os.system('clear')
+        os.system("clear")
         print()
         print("############################################")
         print("#####      Altera Dados do Cliente     #####")
@@ -87,15 +84,17 @@ while op_pric != '0':
         print()
         fone = input("##### Celular: ")
         print()
-        print("Aluno alterado com sucesso!")
+        print("Dados alterados com sucesso!")
         input("Tecle <ENTER> para continuar...")
   
       elif op_cliente == '4':
-        os.system('clear')
+        os.system("clear")
         print()
         print("############################################")
         print("#####         Exclui Cliente           #####")
         print("############################################")
+        print()
+        nome = input("##### Nome: ")
         print()
         cpf = input("##### CPF: ")
         print()
@@ -106,7 +105,7 @@ while op_pric != '0':
   elif op_pric == '2':
     op_func = ''
     while op_func != '0':
-      os.system('clear')
+      os.system("clear")
       print()
       print("#############################################")
       print("##### Você está no Módulo Funcionários  #####")
@@ -116,12 +115,12 @@ while op_pric != '0':
       print("##### 3 - Alterar Dados do Funcionários #####")
       print("##### 4 - Excluir Funcionário           #####")
       print("##### 0 - Retornar ao Menu Principal    #####")
-      resp2 = input("##### Escolha sua opção: ")
+      op_func = input("##### Escolha sua opção: ")
       print()
       input("Tecle <ENTER> para continuar...")
       
       if op_func == '1':
-        os.system('clear')
+        os.system("clear")
         print()
         print("#############################################")
         print("#####      Cadastrar Funcionários       #####")
@@ -135,11 +134,11 @@ while op_pric != '0':
         print()
         fone = input("##### Celular: ")
         print()
-        print("Aluno cadastrado com sucesso!")
+        print("Funcionário cadastrado com sucesso!")
         input("Tecle <ENTER> para continuar...")
 
       elif op_func == '2':
-        os.system('clear')
+        os.system("clear")
         print()
         print("############################################")
         print("#####    Exibe Dados do Funcionário    #####")
@@ -153,10 +152,10 @@ while op_pric != '0':
         input("Tecle <ENTER> para continuar...")
 
       elif op_func == '3':
-        os.system('clear')
+        os.system("clear")
         print()
         print("############################################")
-        print("#####    Altera Dados do Funcionário   #####")
+        print("#####   Alterar Dados do Funcionário   #####")
         print("############################################")
         print()
         nome = input("##### Nome: ")
@@ -167,54 +166,113 @@ while op_pric != '0':
         print()
         fone = input("##### Celular: ")
         print()
-        print("Aluno alterado com sucesso!")
+        print("Dados alterados com sucesso!")
         input("Tecle <ENTER> para continuar...")
 
       elif op_func == '4':
-        os.system('clear')
+        os.system("clear")
         print()
         print("############################################")
         print("#####       Exclui Funcionário         #####")
         print("############################################")
         print()
+        nome = input("##### Nome: ")
+        print()
         cpf = input("##### CPF: ")
         print()
-        print("Aluno excluído com sucesso!")
+        print("Funcionário excluído com sucesso!")
         input("Tecle <ENTER> para continuar...")
 
   
-  elif op_pric == '3':          
-    print()
-    print("############################################")
-    print("#####         Módulo Veículos          #####")
-    print("############################################")
-    print("##### 1 - Cadastrar Veículo            #####")
-    print("##### 2 - Exibir Dados do Veículo      #####")
-    print("##### 3 - Alterar Dados do Veículo     #####")
-    print("##### 4 - Excluir Veículo              #####")
-    print("##### 0 - Retornar ao Menu Principal   #####")
-    resp2 = input("##### Escolha sua opção: ")
-    print()
-    input("Tecle <ENTER> para continuar...")
+  elif op_pric == '3':
+    op_veic = ''
+    while op_veic != 0:
+      os.system('clear')    
+      print()
+      print("############################################")
+      print("#####         Módulo Veículos          #####")
+      print("############################################")
+      print("##### 1 - Cadastrar Veículo            #####")
+      print("##### 2 - Exibir Dados do Veículo      #####")
+      print("##### 3 - Alterar Dados do Veículo     #####")
+      print("##### 4 - Excluir Veículo              #####")
+      print("##### 0 - Retornar ao Menu Principal   #####")
+      resp2 = input("##### Escolha sua opção: ")
+      print()
+      input("Tecle <ENTER> para continuar...")
 
+      if op_veic == '1':
+        os.system('clear')
+        print()
+        print("############################################")
+        print("#####        Cadastrar Veículo        #####")
+        print("############################################")
+        modelo = input("##### Modelo: ")
+        print()
+        ano = input("##### Ano de lançamento: ")
+        print()
+        cor = input("##### Cor: ")
+        print()
+        chassi = input("##### Número do Chassi: ")
+        print()
+        placa = input("##### Número da placa: ")
+        print()
+        print("Veículo cadastrado com sucesso!")
+        input("Tecle <ENTER> para continuar...")
 
-  elif op_pric == '4':
-    print()
-    print("#############################################")
-    print("#####   Você está no Módulo Relatório   #####")
-    print("#############################################")
-    print("##### 1 - Lista Geral de Clientes       #####")
-    print("##### 2 - Lista Geral de Funcionários   #####")
-    print("##### 3 - Lista Geral de Veículos       #####")
-    print("##### 4 - Lista de Veículos Alugados    #####")
-    print("##### 5 - Veículos mais Procurados      #####")
-    print("##### 0 - Retornar ao Menu Principal    #####")
-    op_pric = input("##### Escolha sua opção: ")
-    print()
-    input("Tecle <ENTER> para continuar           #####")
-      
+      elif op_veic == '2':
+        os.system('clear')
+        print()
+        print("############################################")
+        print("#####    Exibe Dados do Veículo       #####")
+        print("############################################")
+        print()
+        print("##### Modelo: ")
+        print("##### Ano de lançamento: ")
+        print("##### Cor: ")
+        print("##### Número do Chassi: ")
+        print("##### Número da placa: ")
+        print()
+        input("Tecle <ENTER> para continuar...")
+
+      elif op_veic == '3':
+        os.system('clear')
+        print()
+        print("############################################")
+        print("#####    Alterar Dados do Veículo      #####")
+        print("############################################")
+        modelo = input("##### Modelo: ")
+        print()
+        ano = input("##### Ano de lançamento: ")
+        print()
+        cor = input("##### Cor: ")
+        print()
+        chassi = input("##### Número do Chassi: ")
+        print()
+        placa = input("##### Número da placa: ")
+        print()
+        print("Dados alterados com sucesso!")
+        input("Tecle <ENTER> para continuar...")
+
+      elif op_veic == '4':
+        os.system('clear')
+        print()
+        print("############################################")
+        print("#####       Exclui Veículo             #####")
+        print("############################################")
+        print()
+        modelo = input("##### Modelo: ")
+        print()
+        ano = input("##### Ano de lançamento: ")
+        print()
+        cor = input("##### Cor: ")
+        print()
+        chassi = input("##### Número do Chassi: ")
+        print()
+        placa = input("##### Número da placa: ")
+        print()
     
-  elif op_pric == '5':
+  elif op_pric == '4':
    print()
    print("#############################################")
    print("#####   Você está no Módulo Reserva     #####")
@@ -229,7 +287,22 @@ while op_pric != '0':
    op_pric = input("##### Escolha sua opção: ")
    print()
    input("Tecle <ENTER> para continuar...")
-    
+
+  elif op_pric == '5':
+    print()
+    print("#############################################")
+    print("#####   Você está no Módulo Relatório   #####")
+    print("#############################################")
+    print("##### 1 - Lista Geral de Clientes       #####")
+    print("##### 2 - Lista Geral de Funcionários   #####")
+    print("##### 3 - Lista Geral de Veículos       #####")
+    print("##### 4 - Lista de Veículos Alugados    #####")
+    print("##### 5 - Veículos mais Procurados      #####")
+    print("##### 0 - Retornar ao Menu Principal    #####")
+    op_pric = input("##### Escolha sua opção: ")
+    print()
+    input("Tecle <ENTER> para continuar           #####")
+
   elif op_pric == '6':
     print()
     print("#############################################")
