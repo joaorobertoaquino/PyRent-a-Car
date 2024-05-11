@@ -1,41 +1,23 @@
 import os
+from funcoes import (
+    menuPrincipal,
+    modCliente,
+    modFunc,
+    modVeic
+)
 
 ###################################################
 ##### Projeto - Locadora de Carros - Versão 4 #####
 ###################################################
 
-
 op_pric = ''
 while op_pric != '0':
-  os.system("clear")
-  print("############################################")
-  print("######      Locadora de Carros        ######")
-  print("############################################")
-  print("#####      1 - Módulo Cliente          #####")
-  print("#####      2 - Módulo Funcionários     #####")
-  print("#####      3 - Módulo Veículos         #####")
-  print("#####      4 - Módulo Reserva          #####")
-  print("#####      5 - Módulo Relatório        #####")
-  print("#####      6 - Módulo Informações      #####")
-  print("#####      0 - Sair                    #####")
-  op_pric = input("##### Escolha sua opção: ")
-    
+  op_pric = menuPrincipal()
+  
   if op_pric == '1':
     op_cliente = ''
     while op_cliente != '0':
-      os.system("clear")
-      print()
-      print("#############################################")
-      print("#####    Você está no Módulo Cliente    #####")
-      print("#############################################")
-      print("##### 1 - Cadastrar Cliente             #####")
-      print("##### 2 - Exibir Dados do Cliente       #####")
-      print("##### 3 - Alterar Dados do Cliente      #####")
-      print("##### 4 - Excluir Cliente               #####")
-      print("##### 0 - Retornar ao Menu Principal    #####")
-      op_cliente = input("##### Escolha sua opção: ")
-      print()
-      input("Tecle <ENTER> para continuar...")
+      op_cliente = modCliente()
           
       if op_cliente == '1':
         os.system("clear")
@@ -105,20 +87,8 @@ while op_pric != '0':
   elif op_pric == '2':
     op_func = ''
     while op_func != '0':
-      os.system("clear")
-      print()
-      print("#############################################")
-      print("##### Você está no Módulo Funcionários  #####")
-      print("#############################################")
-      print("##### 1 - Cadastrar Funcionários        #####")
-      print("##### 2 - Exibir Dados do Funcionários  #####")
-      print("##### 3 - Alterar Dados do Funcionários #####")
-      print("##### 4 - Excluir Funcionário           #####")
-      print("##### 0 - Retornar ao Menu Principal    #####")
-      op_func = input("##### Escolha sua opção: ")
-      print()
-      input("Tecle <ENTER> para continuar...")
-      
+      op_func = modFunc()
+           
       if op_func == '1':
         os.system("clear")
         print()
@@ -187,19 +157,7 @@ while op_pric != '0':
   elif op_pric == '3':
     op_veic = ''
     while op_veic != 0:
-      os.system('clear')    
-      print()
-      print("############################################")
-      print("#####         Módulo Veículos          #####")
-      print("############################################")
-      print("##### 1 - Cadastrar Veículo            #####")
-      print("##### 2 - Exibir Dados do Veículo      #####")
-      print("##### 3 - Alterar Dados do Veículo     #####")
-      print("##### 4 - Excluir Veículo              #####")
-      print("##### 0 - Retornar ao Menu Principal   #####")
-      resp2 = input("##### Escolha sua opção: ")
-      print()
-      input("Tecle <ENTER> para continuar...")
+      op_veic = modVeic()
 
       if op_veic == '1':
         os.system('clear')
