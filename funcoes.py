@@ -20,7 +20,13 @@ def menuPrincipal():
     
 ###############################################  
 #####          Módulo Cliente             #####  
-###############################################  
+############################################### 
+cliente = {
+  '22233344455': ['Taciano Silva', 'taciano@ufrn.br', '(83) 99900-0111'], 
+  '33344455566': ['Karliane Vale', 'karliane@ufrn.br', '(84) 99999-8888'],
+  '44455566677': ['João Roberto', 'joao@ufrn.br', '(84) 99801-1505']
+}
+
 def modCliente():
     os.system("clear")
     print()
@@ -32,9 +38,7 @@ def modCliente():
     print("##### 3 - Alterar Dados do Cliente      #####")
     print("##### 4 - Excluir Cliente               #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
-    op_cliente = input("##### Escolha sua opção: ")
-    print()
-    input("Tecle <ENTER> para continuar...") 
+    op_cliente = input("##### Escolha sua opção: ") 
     return op_cliente
 
 def cadastrarCliente():
@@ -52,6 +56,8 @@ def cadastrarCliente():
     print()
     fone = input("##### Celular: ")
     print()
+    cliente[cpf] = [nome,email,fone]
+    print(cliente)
     print("Aluno cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -59,13 +65,17 @@ def exibirDadosCliente():
     os.system("clear")
     print()
     print("############################################")
-    print("#####      Exibe Dados do Cliente      #####")
+    print("#####     Exibir Dados do Cliente      #####")
     print("############################################")
     print()
-    print("##### Nome: ")
-    print("##### CPF: ")
-    print("##### Email: ")
-    print("##### Celular: ")
+    cpf = input('Qual o CPF do cliente?')
+    if cpf in cliente:
+        print("##### Nome: ", cliente[cpf][0])
+        print("##### CPF: ", cpf)
+        print("##### Email: ", cliente[cpf][1])
+        print("##### Celular: ", cliente[cpf][2])
+    else:
+        print('Cliente inexistente!')
     print()
     input("Tecle <ENTER> para continuar...")
 
@@ -76,15 +86,19 @@ def alterarDadosCliente():
     print("#####      Alterar Dados do Cliente    #####")
     print("############################################")
     print()
-    nome = input("##### Nome: ")
-    print()
-    cpf = input("##### CPF: ")
-    print()
-    email = input("##### Email: ")
-    print()
-    fone = input("##### Celular: ")
-    print()
-    print("Dados alterados com sucesso!")
+    cpf = input('Qual o CPF do cliente?')
+    if cpf in cliente:
+        print('Informe os novos dados do cliente: ')
+        nome = input("##### Nome: ")
+        print()
+        email = input("##### Email: ")
+        print()
+        fone = input("##### Celular: ")
+        print()
+        cliente[cpf] = [nome,email,fone]
+        print("Dados alterados com sucesso!")
+    else:
+        print('Cliente inexistente!')
     input("Tecle <ENTER> para continuar...")
 
 def excluirCliente():
@@ -94,16 +108,31 @@ def excluirCliente():
     print("#####         Excluir Cliente          #####")
     print("############################################")
     print()
-    nome = input("##### Nome: ")
-    print()
-    cpf = input("##### CPF: ")
-    print()
-    print("Aluno excluído com sucesso!")
+    cpf = input('Informe o CPF do cliente: ')
+    if cpf in cliente:
+        print("##### Nome: ", cliente[cpf][0])
+        print("##### Email: ", cliente[cpf][1])
+        print("##### Celular: ", cliente[cpf][2])
+        print()
+        resp = input('Tem certeza que deseja excluir este cliente? (S/N)?')
+        if resp.upper() == 'S':
+            del cliente[cpf]
+            print("Aluno excluído com sucesso!")
+        else:
+            print('Exclusão não realizada!')
+    else:
+        print('Cliente inexistente!')
     input("Tecle <ENTER> para continuar...")
     
 ############################################### 
 #####          Módulo Funcionários        #####        
 ###############################################    
+funcionarios = {
+  '11122233344': ['Flavius Gorgônio', 'flavius@ufrn.br', '(84) 99988-8777'], 
+  '22233344455': ['Taciano Silva', 'taciano@ufrn.br', '(83) 99900-0111'], 
+  '33344455566': ['Karliane Vale', 'karliane@ufrn.br', '(84) 99999-8888']
+}
+
 def modFunc():
     os.system("clear")
     print()
@@ -116,8 +145,6 @@ def modFunc():
     print("##### 4 - Excluir Funcionário           #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
     op_func = input("##### Escolha sua opção: ")
-    print()
-    input("Tecle <ENTER> para continuar...")
     return op_func
 
 def cadastrarFunc():
@@ -135,6 +162,8 @@ def cadastrarFunc():
     print()
     fone = input("##### Celular: ")
     print()
+    funcionarios[cpf] = [nome,email,fone]
+    print(funcionarios)
     print("Funcionário cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -145,10 +174,14 @@ def exibirDadosFunc():
     print("#####   Exibir Dados do Funcionário    #####")
     print("############################################")
     print()
-    print("##### Nome: ")
-    print("##### Idade: ")
-    print("##### Email: ")
-    print("##### Celular: ")
+    cpf = input('Qual o CPF do funcionário(a)? ')
+    if cpf in funcionarios:
+        print("##### Nome: ", funcionarios[cpf][0])
+        print("##### CPF: ", cpf)
+        print("##### Email: ", funcionarios[cpf][1])
+        print("##### Celular: ", funcionarios[cpf][2])
+    else:
+        print('Funcionário(a) inexistente!')
     print()
     input("Tecle <ENTER> para continuar...")
 
@@ -159,15 +192,19 @@ def alterarDadosFunc():
     print("#####   Alterar Dados do Funcionário   #####")
     print("############################################")
     print()
-    nome = input("##### Nome: ")
-    print()
-    cpf = input("##### CPF: ")
-    print()
-    email = input("##### Email: ")
-    print()
-    fone = input("##### Celular: ")
-    print()
-    print("Dados alterados com sucesso!")
+    cpf = input('Qual o CPF do funcionário(a)? ')
+    if cpf in funcionarios:
+        print('Informe os novos dados do funcionário(a): ')
+        nome = input("##### Nome: ")
+        print()
+        email = input("##### Email: ")
+        print()
+        fone = input("##### Celular: ")
+        print()
+        funcionarios[cpf] = [nome,email,fone]
+        print('Dados alterados com sucesso!')
+    else:
+        print('Funcionário(a) inexistente!')
     input("Tecle <ENTER> para continuar...")
 
 def excluirFunc():
@@ -177,16 +214,31 @@ def excluirFunc():
     print("#####       Excluir Funcionário        #####")
     print("############################################")
     print()
-    nome = input("##### Nome: ")
-    print()
-    cpf = input("##### CPF: ")
-    print()
-    print("Funcionário excluído com sucesso!")
+    cpf = input('Informe o CPF do funcionário(a): ')
+    if cpf in funcionarios:
+        print("##### Nome: ", funcionarios[cpf][0])
+        print("##### Email: ", funcionarios[cpf][1])
+        print("##### Celular: ", funcionarios[cpf][2])
+        print()
+        resp = input('Tem certeza que deseja excluir este funcionário(a)? (S/N)')
+        if resp.upper() == 'S':
+            del funcionarios[cpf]
+            print("Funcionário(a) excluído com sucesso!")
+        else:
+            print('Exclusão não realizada!')
+    else:
+        print("Funcionário inexistente!")
     input("Tecle <ENTER> para continuar...") 
 
 ###########################################
 #####         Módulo Veículos         #####         
 ###########################################
+veiculos = {
+    'BEE4R22': ['Chevrolet', 'Onix', '2020', 'Branco'],
+    'AAA2T33': ['Chevrolet', 'Onix Plus', '2020', 'Vermelho'],
+    'BBB3E44': ['Ferrari', 'Ferrari 488 GTB', '2022', 'Branco']
+}
+
 def modVeic():
     os.system('clear')    
     print()
@@ -199,8 +251,6 @@ def modVeic():
     print("##### 4 - Excluir Veículo              #####")
     print("##### 0 - Retornar ao Menu Principal   #####")
     op_veic = input("##### Escolha sua opção: ")
-    print()
-    input("Tecle <ENTER> para continuar...")
     return op_veic
 
 def cadastrarVeic():
@@ -209,16 +259,19 @@ def cadastrarVeic():
     print("############################################")
     print("#####        Cadastrar Veículo         #####")
     print("############################################")
+    print()
+    marca = input("##### Marca: ")
+    print()
     modelo = input("##### Modelo: ")
     print()
     ano = input("##### Ano de lançamento: ")
     print()
     cor = input("##### Cor: ")
     print()
-    chassi = input("##### Número do Chassi: ")
-    print()
     placa = input("##### Número da placa: ")
     print()
+    veiculos[placa] = [marca,modelo,ano,cor]
+    print(veiculos)
     print("Veículo cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -226,14 +279,18 @@ def exibirDadosVeic():
     os.system('clear')
     print()
     print("############################################")
-    print("#####    Exibe Dados do Veículo       #####")
+    print("#####    Exibir Dados do Veículo       #####")
     print("############################################")
     print()
-    print("##### Modelo: ")
-    print("##### Ano de lançamento: ")
-    print("##### Cor: ")
-    print("##### Número do Chassi: ")
-    print("##### Número da placa: ")
+    placa = input('Informe a placa do veículo? ')
+    if placa in veiculos:
+        print("##### Marca: ", veiculos[placa][0])
+        print("##### Modelo: ", veiculos[placa][1])
+        print("##### Ano de lançamento: ", veiculos[placa][2])
+        print("##### Cor: ", veiculos[placa][3])
+        print("##### Número da placa: ", placa)
+    else:
+        print('Veículo inexistente!')
     print()
     input("Tecle <ENTER> para continuar...")
 
@@ -243,37 +300,46 @@ def alterarDadosVeic():
     print("############################################")
     print("#####    Alterar Dados do Veículo      #####")
     print("############################################")
-    modelo = input("##### Modelo: ")
     print()
-    ano = input("##### Ano de lançamento: ")
-    print()
-    cor = input("##### Cor: ")
-    print()
-    chassi = input("##### Número do Chassi: ")
-    print()
-    placa = input("##### Número da placa: ")
-    print()
-    print("Dados alterados com sucesso!")
+    placa = input('Informe a placa do veículo: ')
+    if placa in veiculos:
+        print('Informe os novos dados do veículo: ')
+        marca = input("##### Marca: ")
+        print()
+        modelo = input("##### Modelo: ")
+        print()
+        ano = input("##### Ano de lançamento: ")
+        print()
+        cor = input("##### Cor: ")
+        print()
+        veiculos[placa] = [marca,modelo,ano,cor]
+        print("Dados alterados com sucesso!")
+    else:
+        print('Veículo inexistente!')
     input("Tecle <ENTER> para continuar...")
 
 def excluirVeic():
     os.system('clear')
     print()
     print("############################################")
-    print("#####       Exclui Veículo             #####")
+    print("#####       Excluir Veículo            #####")
     print("############################################")
     print()
-    modelo = input("##### Modelo: ")
-    print()
-    ano = input("##### Ano de lançamento: ")
-    print()
-    cor = input("##### Cor: ")
-    print()
-    chassi = input("##### Número do Chassi: ")
-    print()
-    placa = input("##### Número da placa: ")
-    print()
-    print("Veículo excluído com sucesso!")
+    placa = input('Informe a placa do veículo: ')
+    if placa in veiculos:
+        print("##### Marca: ", veiculos[placa][0])
+        print("##### Modelo: ", veiculos[placa][1])
+        print("##### Ano de lançamento: ", veiculos[placa][2])
+        print("##### Cor: ", veiculos[placa][3])
+        print()
+        resp = input('Tem certeza que deseja excluir este veículo? (S/N)')
+        if resp.upper() == 'S':
+            del veiculos[placa]
+            print("Veículo excluído com sucesso!")
+        else:
+            print('Exclusão não realizada!')
+    else:
+        print('Veículo inexistente!')
     input("Tecle <ENTER> para continuar...")
 
 ############################################
@@ -286,15 +352,12 @@ def modReserva():
     print("#####   Você está no Módulo Reserva     #####")
     print("#############################################")
     print("##### 1 - Lista de Veículos Disponíveis #####")
-    print("##### 2 - Lista de Preços               #####")
-    print("##### 3 - Opções de Seguro              #####")
-    print("##### 4 - Formas de Pagamento           #####")
-    print("##### 5 - Política de Combustível       #####")
-    print("##### 6 - Suporte ao Cliente            #####")
+    print("##### 2 - Opções de Seguro              #####")
+    print("##### 3 - Formas de Pagamento           #####")
+    print("##### 4 - Política de Combustível       #####")
+    print("##### 5 - Suporte ao Cliente            #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
     op_reserva = input("##### Escolha sua opção: ")
-    print()
-    input("Tecle <ENTER> para continuar...")
     return op_reserva
 
 #############################################
@@ -306,15 +369,12 @@ def modRelatorio():
     print("#############################################")
     print("#####   Você está no Módulo Relatório   #####")
     print("#############################################")
-    print("##### 1 - Lista Geral de Clientes       #####")
-    print("##### 2 - Lista Geral de Funcionários   #####")
-    print("##### 3 - Lista Geral de Veículos       #####")
-    print("##### 4 - Lista de Veículos Alugados    #####")
-    print("##### 5 - Veículos mais Procurados      #####")
+    print("##### 1 - Lista Geral de Funcionários   #####")
+    print("##### 2 - Lista Geral de Veículos       #####")
+    print("##### 3 - Lista de Veículos Alugados    #####")
+    print("##### 4 - Veículos mais Procurados      #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
     op_relatorio = input("##### Escolha sua opção: ")
-    print()
-    input("Tecle <ENTER> para continuar            #####")
     return op_relatorio 
 
    

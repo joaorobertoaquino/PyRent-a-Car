@@ -3,22 +3,22 @@ from funcoes import (
     alterarDadosFunc,
     cadastrarFunc,
     cadastrarVeic,
-    excluirFunc,
     excluirVeic,
+    excluirFunc,
     exibirDadosFunc,
     exibirDadosVeic,
     menuPrincipal,
     modCliente,
     cadastrarCliente,
     excluirCliente,
-    exibirDadosCliente,
-    alterarDadosCliente,
     modFunc,
     modInfo,
     modRelatorio,
     modReserva,
     modVeic,
-    alterarDadosVeic
+    alterarDadosVeic,
+    alterarDadosCliente,
+    exibirDadosCliente
 )
 
 ###################################################
@@ -35,16 +35,16 @@ while op_pric != '0':
       op_cliente = modCliente()
       
       if op_cliente == '1':
-        op_cliente = cadastrarCliente()
+        cadastrarCliente()
 
       elif op_cliente == '2':
-        op_cliente = exibirDadosCliente()
+        exibirDadosCliente()
 
       elif op_cliente == '3':
-        op_cliente = alterarDadosCliente()
+        alterarDadosCliente()
   
       elif op_cliente == '4':
-        op_cliente = excluirCliente()
+        excluirCliente()
    
   elif op_pric == '2':
     op_func = ''
@@ -52,16 +52,16 @@ while op_pric != '0':
       op_func = modFunc()
            
       if op_func == '1':
-        op_func = cadastrarFunc()
+        cadastrarFunc()
 
       elif op_func == '2':
-        op_func = exibirDadosFunc()
+        exibirDadosFunc()
 
       elif op_func == '3':
-        op_func = alterarDadosFunc()
+        alterarDadosFunc()
 
       elif op_func == '4':
-        op_func = excluirFunc()
+        excluirFunc()
 
   elif op_pric == '3':
     op_veic = ''
@@ -69,16 +69,16 @@ while op_pric != '0':
       op_veic = modVeic()
 
       if op_veic == '1':
-        op_veic = cadastrarVeic()
+        cadastrarVeic()
 
       elif op_veic == '2':
-        op_veic = exibirDadosVeic()
+        exibirDadosVeic()
 
       elif op_veic == '3':
-        op_veic = alterarDadosVeic()
+        alterarDadosVeic()
 
       elif op_veic == '4':
-        op_veic = excluirVeic()
+        excluirVeic()
     
   elif op_pric == '4':
    op_reserva = ''
