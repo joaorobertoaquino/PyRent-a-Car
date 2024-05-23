@@ -18,13 +18,13 @@ from funcoes import (
     modVeic,
     alterarDadosVeic,
     alterarDadosCliente,
-    exibirDadosCliente
+    exibirDadosCliente,
+    escreverArquivos       
 )
 
 ###################################################
 ##### Projeto - Locadora de Carros - Versão 4 #####
 ###################################################
-
 op_pric = ''
 while op_pric != '0':
   op_pric = menuPrincipal()
@@ -96,3 +96,4 @@ while op_pric != '0':
 
 print("Você encerrou o programa!")
 print("Até logo!")
+escreverArquivos()

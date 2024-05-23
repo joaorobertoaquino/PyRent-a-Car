@@ -1,4 +1,22 @@
 import os
+import pickle
+from dicionarios import cliente, funcionarios, veiculos
+
+########################################################
+#####            Escrever Arquivos                 #####
+########################################################
+def escreverArquivos():
+    arq_cliente = open("cliente.dat", "wb")
+    pickle.dump(cliente, arq_cliente)
+    arq_cliente.close()
+
+    arq_funcionarios = open("funcionarios.dat", "wb")
+    pickle.dump(funcionarios, arq_funcionarios)
+    arq_funcionarios.close()
+
+    arq_veiculos = open("veiculos.dat", "wb")
+    pickle.dump(veiculos, arq_veiculos)
+    arq_veiculos.close()
 
 ########################################################
 #####                Menu Pricipal                 #####
@@ -21,11 +39,6 @@ def menuPrincipal():
 ###############################################  
 #####          Módulo Cliente             #####  
 ############################################### 
-cliente = {
-  '22233344455': ['Taciano Silva', 'taciano@ufrn.br', '(83) 99900-0111'], 
-  '33344455566': ['Karliane Vale', 'karliane@ufrn.br', '(84) 99999-8888'],
-  '44455566677': ['João Roberto', 'joao@ufrn.br', '(84) 99801-1505']
-}
 
 def modCliente():
     os.system("clear")
@@ -57,8 +70,7 @@ def cadastrarCliente():
     fone = input("##### Celular: ")
     print()
     cliente[cpf] = [nome,email,fone]
-    print(cliente)
-    print("Aluno cadastrado com sucesso!")
+    print("Cliente cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
 def exibirDadosCliente():
@@ -127,11 +139,6 @@ def excluirCliente():
 ############################################### 
 #####          Módulo Funcionários        #####        
 ###############################################    
-funcionarios = {
-  '11122233344': ['Flavius Gorgônio', 'flavius@ufrn.br', '(84) 99988-8777'], 
-  '22233344455': ['Taciano Silva', 'taciano@ufrn.br', '(83) 99900-0111'], 
-  '33344455566': ['Karliane Vale', 'karliane@ufrn.br', '(84) 99999-8888']
-}
 
 def modFunc():
     os.system("clear")
@@ -163,7 +170,6 @@ def cadastrarFunc():
     fone = input("##### Celular: ")
     print()
     funcionarios[cpf] = [nome,email,fone]
-    print(funcionarios)
     print("Funcionário cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -233,11 +239,6 @@ def excluirFunc():
 ###########################################
 #####         Módulo Veículos         #####         
 ###########################################
-veiculos = {
-    'BEE4R22': ['Chevrolet', 'Onix', '2020', 'Branco'],
-    'AAA2T33': ['Chevrolet', 'Onix Plus', '2020', 'Vermelho'],
-    'BBB3E44': ['Ferrari', 'Ferrari 488 GTB', '2022', 'Branco']
-}
 
 def modVeic():
     os.system('clear')    
@@ -271,7 +272,6 @@ def cadastrarVeic():
     placa = input("##### Número da placa: ")
     print()
     veiculos[placa] = [marca,modelo,ano,cor]
-    print(veiculos)
     print("Veículo cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -371,8 +371,7 @@ def modRelatorio():
     print("#############################################")
     print("##### 1 - Lista Geral de Funcionários   #####")
     print("##### 2 - Lista Geral de Veículos       #####")
-    print("##### 3 - Lista de Veículos Alugados    #####")
-    print("##### 4 - Veículos mais Procurados      #####")
+    print("##### 3 - Veículos mais Procurados      #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
     op_relatorio = input("##### Escolha sua opção: ")
     return op_relatorio 
