@@ -18,6 +18,7 @@ def escreverArquivos():
     pickle.dump(veiculos, arq_veiculos)
     arq_veiculos.close()
 
+
 ########################################################
 #####                Menu Pricipal                 #####
 ########################################################
@@ -36,10 +37,10 @@ def menuPrincipal():
     op_pric = input("##### Escolha sua opção: ")
     return op_pric
     
+
 ###############################################  
 #####          Módulo Cliente             #####  
 ############################################### 
-
 def modCliente():
     os.system("clear")
     print()
@@ -136,10 +137,10 @@ def excluirCliente():
         print('Cliente inexistente!')
     input("Tecle <ENTER> para continuar...")
     
+
 ############################################### 
 #####          Módulo Funcionários        #####        
 ###############################################    
-
 def modFunc():
     os.system("clear")
     print()
@@ -236,10 +237,10 @@ def excluirFunc():
         print("Funcionário inexistente!")
     input("Tecle <ENTER> para continuar...") 
 
+
 ###########################################
 #####         Módulo Veículos         #####         
 ###########################################
-
 def modVeic():
     os.system('clear')    
     print()
@@ -342,6 +343,7 @@ def excluirVeic():
         print('Veículo inexistente!')
     input("Tecle <ENTER> para continuar...")
 
+
 ############################################
 #####          Módulo Reserva          #####        
 ############################################
@@ -360,6 +362,7 @@ def modReserva():
     op_reserva = input("##### Escolha sua opção: ")
     return op_reserva
 
+
 #############################################
 #####         Módulo Relatório          #####   
 #############################################
@@ -369,12 +372,68 @@ def modRelatorio():
     print("#############################################")
     print("#####   Você está no Módulo Relatório   #####")
     print("#############################################")
-    print("##### 1 - Lista Geral de Funcionários   #####")
-    print("##### 2 - Lista Geral de Veículos       #####")
-    print("##### 3 - Veículos mais Procurados      #####")
+    print("##### 1 - Lista Geral de Clientes       #####")
+    print("##### 2 - Lista Geral de Funcionários   #####")
+    print("##### 3 - Lista Geral de Veículos       #####")
+    print("##### 4 - Veículos mais Procurados      #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
     op_relatorio = input("##### Escolha sua opção: ")
     return op_relatorio 
+
+def lista_geral_clientes():
+    os.system('clear')
+    print()
+    print("##################################################################################")
+    print("#######################      Lista Geral de Clientes       #######################")
+    print("##################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print("|    CPF    |        Nome Completo        |       E-mail       |     Celular     |")
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    for cpf in cliente:
+        print("| %-10s "%(cpf), end='')
+        print("| %-24s "%(cliente[cpf][0]), end='')
+        print("| %-20s "%(cliente[cpf][1]), end='')
+        print("| %-16s |"%(cliente[cpf][2]))
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print()
+    input("Tecle <ENTER> para continuar...")
+
+def lista_geral_funcionarios():
+    os.system('clear')
+    print()
+    print("##################################################################################")
+    print("#######################     Lista Geral de Funcionários    #######################")
+    print("##################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print("|    CPF    |        Nome Completo        |       E-mail       |     Celular     |")
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    for cpf in funcionarios:
+        print("| %-15s "%(cpf), end='')
+        print("| %-27s "%(funcionarios[cpf][0]), end='')
+        print("| %-18s "%(funcionarios[cpf][1]), end='')
+        print("| %-15s |"%(funcionarios[cpf][2]))
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print()
+    input("Tecle <ENTER> para continuar...")
+
+def lista_geral_veiculos():
+    os.system('clear')
+    print()
+    print("##################################################################################")
+    print("#######################       Lista Geral de Veículos      #######################")
+    print("##################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
+    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
+    for placa in veiculos:
+        print("| %-9s "%(placa), end='')
+        print("| %-27s "%(veiculos[placa][0]), end='')
+        print("| %-18s "%(veiculos[placa][1]), end='')
+        print("| %-15s "%(veiculos[placa][2]))
+        print("| %-10s |"%(veiculos[placa][3]))
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print()
+    input("Tecle <ENTER> para continuar...") 
 
    
 ##############################################

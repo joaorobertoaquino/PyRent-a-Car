@@ -27,7 +27,7 @@ try:
   cliente = pickle.load(arq_cliente)
 except:
   arq_cliente = open("cliente.dat", "wb")
-arq_cliente.close()
+  arq_cliente.close()
 
 funcionarios = {}
 try:

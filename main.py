@@ -19,7 +19,10 @@ from funcoes import (
     alterarDadosVeic,
     alterarDadosCliente,
     exibirDadosCliente,
-    escreverArquivos       
+    escreverArquivos,
+    lista_geral_clientes,
+    lista_geral_funcionarios,
+    lista_geral_veiculos 
 )
 
 ###################################################
@@ -89,6 +92,15 @@ while op_pric != '0':
     op_relatorio = ''
     while op_relatorio != '0':
       op_relatorio = modRelatorio()
+      print()
+      if op_relatorio == '1':
+        lista_geral_clientes()
+      elif op_relatorio == '2':
+        lista_geral_funcionarios()
+      elif op_relatorio == '3':
+        lista_geral_veiculos()
+      
+
      
 
   elif op_pric == '6':
