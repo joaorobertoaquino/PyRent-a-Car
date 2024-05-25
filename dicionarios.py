@@ -1,15 +1,15 @@
 import pickle
 
 cliente = {
-  '22233344455': ['Taciano Silva', 'taciano@ufrn.br', '(83) 99900-0111'], 
-  '33344455566': ['Karliane Vale', 'karliane@ufrn.br', '(84) 99999-8888'],
-  '44455566677': ['João Roberto', 'joao@ufrn.br', '(84) 99801-1505']
+  '22233344455': ['Taciano Silva', 'taciano@ufrn.br', '(83) 99900-0111','01/01/01, 00:00:00'], 
+  '33344455566': ['Karliane Vale', 'karliane@ufrn.br', '(84) 99999-8888','01/01/01, 00:00:00'],
+  '44455566677': ['João Roberto', 'joao@ufrn.br', '(84) 99801-1505','01/01/01, 00:00:00']
 }
 
 funcionarios = {
-  '11122233344': ['Flavius Gorgônio', 'flavius@ufrn.br', '(84) 99988-8777'], 
-  '22233344455': ['Taciano Silva', 'taciano@ufrn.br', '(83) 99900-0111'], 
-  '33344455566': ['Karliane Vale', 'karliane@ufrn.br', '(84) 99999-8888']
+  '11122233344': ['Flavius Gorgônio', 'flavius@ufrn.br', '(84) 99988-8777','01/01/01, 00:00:00'], 
+  '22233344455': ['Taciano Silva', 'taciano@ufrn.br', '(83) 99900-0111','01/01/01, 00:00:00'], 
+  '33344455566': ['Karliane Vale', 'karliane@ufrn.br', '(84) 99999-8888','01/01/01, 00:00:00']
 }
 
 veiculos = {

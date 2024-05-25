@@ -1,6 +1,7 @@
 import os
 import pickle
 from dicionarios import cliente, funcionarios, veiculos
+from datetime import datetime
 
 ########################################################
 #####            Escrever Arquivos                 #####
@@ -70,7 +71,8 @@ def cadastrarCliente():
     print()
     fone = input("##### Celular: ")
     print()
-    cliente[cpf] = [nome,email,fone]
+    data = datetime.now()
+    cliente[cpf] = [nome,email,fone,data.strftime("%x, %X")]
     print("Cliente cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -170,7 +172,8 @@ def cadastrarFunc():
     print()
     fone = input("##### Celular: ")
     print()
-    funcionarios[cpf] = [nome,email,fone]
+    data = datetime.now()
+    funcionarios[cpf] = [nome,email,fone,data.strftime("%x, %X")]
     print("Funcionário cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -272,7 +275,8 @@ def cadastrarVeic():
     print()
     placa = input("##### Número da placa: ")
     print()
-    veiculos[placa] = [marca,modelo,ano,cor]
+    data = datetime.now()
+    veiculos[placa] = [marca,modelo,ano,cor,data.strftime("%x, %X")]
     print("Veículo cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -354,10 +358,8 @@ def modReserva():
     print("#####   Você está no Módulo Reserva     #####")
     print("#############################################")
     print("##### 1 - Lista de Veículos Disponíveis #####")
-    print("##### 2 - Opções de Seguro              #####")
-    print("##### 3 - Formas de Pagamento           #####")
-    print("##### 4 - Política de Combustível       #####")
-    print("##### 5 - Suporte ao Cliente            #####")
+    print("##### 2 - Reservar Veículo              #####")
+    print("##### 3 - Política de Combustível       #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
     op_reserva = input("##### Escolha sua opção: ")
     return op_reserva
@@ -383,58 +385,73 @@ def modRelatorio():
 def lista_geral_clientes():
     os.system('clear')
     print()
-    print("##################################################################################")
-    print("#######################      Lista Geral de Clientes       #######################")
-    print("##################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|")
-    print("|    CPF    |        Nome Completo        |       E-mail       |     Celular     |")
-    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print("###################################################################################################################################")
+    print("#######################                               Lista Geral de Clientes                               #######################")
+    print("###################################################################################################################################")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
+    print("|     CPF     |            Nome Completo            |               E-mail               |     Celular     |   Data do Cadastro   |")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
     for cpf in cliente:
-        print("| %-10s "%(cpf), end='')
-        print("| %-24s "%(cliente[cpf][0]), end='')
-        print("| %-20s "%(cliente[cpf][1]), end='')
-        print("| %-16s |"%(cliente[cpf][2]))
-    print("|-----------|-----------------------------|--------------------|-----------------|")
+        print("| %-9s "%(cpf), end='')
+        print("| %-35s "%(cliente[cpf][0]), end='')
+        print("| %-34s "%(cliente[cpf][1]), end='')
+        print("| %-15s "%(cliente[cpf][2]), end='')
+        print("| %-20s |"%(cliente[cpf][3]))
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
 def lista_geral_funcionarios():
     os.system('clear')
     print()
-    print("##################################################################################")
-    print("#######################     Lista Geral de Funcionários    #######################")
-    print("##################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|")
-    print("|    CPF    |        Nome Completo        |       E-mail       |     Celular     |")
-    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print("###################################################################################################################################")
+    print("#######################                             Lista Geral de Funcionários                             #######################")
+    print("###################################################################################################################################")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
+    print("|     CPF     |            Nome Completo            |               E-mail               |     Celular     |   Data do Cadastro   |")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
     for cpf in funcionarios:
-        print("| %-15s "%(cpf), end='')
-        print("| %-27s "%(funcionarios[cpf][0]), end='')
-        print("| %-18s "%(funcionarios[cpf][1]), end='')
-        print("| %-15s |"%(funcionarios[cpf][2]))
-    print("|-----------|-----------------------------|--------------------|-----------------|")
+        print("| %-9s "%(cpf), end='')
+        print("| %-35s "%(funcionarios[cpf][0]), end='')
+        print("| %-34s "%(funcionarios[cpf][1]), end='')
+        print("| %-15s "%(funcionarios[cpf][2]), end='')
+        print("| %-20s |"%(funcionarios[cpf][3]))
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
 def lista_geral_veiculos():
     os.system('clear')
     print()
-    print("##################################################################################")
-    print("#######################       Lista Geral de Veículos      #######################")
-    print("##################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
-    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
+    print("#########################################################################################################################")
+    print("#######################                          Lista Geral de Veículos                          #######################")
+    print("#########################################################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
+    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |  Data do Cadastro  |")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
     for placa in veiculos:
         print("| %-9s "%(placa), end='')
         print("| %-27s "%(veiculos[placa][0]), end='')
         print("| %-18s "%(veiculos[placa][1]), end='')
-        print("| %-15s "%(veiculos[placa][2]))
-        print("| %-10s |"%(veiculos[placa][3]))
-    print("|-----------|-----------------------------|--------------------|-----------------|")
+        print("| %-15s "%(veiculos[placa][2]), end='')
+        print("| %-15s "%(veiculos[placa][3]), end='')
+        print("| %-15s |"%(veiculos[placa][4]))
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
     print()
     input("Tecle <ENTER> para continuar...") 
 
+def veiculos_mais_procurados():
+    os.system('clear')
+    print()
+    print("####################################################################################################")
+    print("#######################               Veículos Mais Procurados               #######################")
+    print("####################################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
+    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
+    print()
+    input("Tecle <ENTER> para continuar...")
    
 ##############################################
 #####         Módulo Informações         #####    

@@ -22,7 +22,8 @@ from funcoes import (
     escreverArquivos,
     lista_geral_clientes,
     lista_geral_funcionarios,
-    lista_geral_veiculos 
+    lista_geral_veiculos,
+    veiculos_mais_procurados
 )
 
 ###################################################
@@ -39,13 +40,10 @@ while op_pric != '0':
       
       if op_cliente == '1':
         cadastrarCliente()
-
       elif op_cliente == '2':
         exibirDadosCliente()
-
       elif op_cliente == '3':
-        alterarDadosCliente()
-  
+        alterarDadosCliente() 
       elif op_cliente == '4':
         excluirCliente()
    
@@ -56,13 +54,10 @@ while op_pric != '0':
            
       if op_func == '1':
         cadastrarFunc()
-
       elif op_func == '2':
         exibirDadosFunc()
-
       elif op_func == '3':
         alterarDadosFunc()
-
       elif op_func == '4':
         excluirFunc()
 
@@ -73,13 +68,10 @@ while op_pric != '0':
 
       if op_veic == '1':
         cadastrarVeic()
-
       elif op_veic == '2':
         exibirDadosVeic()
-
       elif op_veic == '3':
         alterarDadosVeic()
-
       elif op_veic == '4':
         excluirVeic()
     
@@ -93,15 +85,15 @@ while op_pric != '0':
     while op_relatorio != '0':
       op_relatorio = modRelatorio()
       print()
+
       if op_relatorio == '1':
         lista_geral_clientes()
       elif op_relatorio == '2':
         lista_geral_funcionarios()
       elif op_relatorio == '3':
         lista_geral_veiculos()
-      
-
-     
+      elif op_relatorio == '4':
+        veiculos_mais_procurados()
 
   elif op_pric == '6':
     op_pric = modInfo()
