@@ -357,12 +357,55 @@ def modReserva():
     print("#############################################")
     print("#####   Você está no Módulo Reserva     #####")
     print("#############################################")
-    print("##### 1 - Lista de Veículos Disponíveis #####")
-    print("##### 2 - Reservar Veículo              #####")
+    print("##### 1 - Reservar Veículo              #####")
+    print("##### 2 - Lista de Veículos Disponíveis #####")
     print("##### 3 - Política de Combustível       #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
     op_reserva = input("##### Escolha sua opção: ")
     return op_reserva
+
+def reservarVeiculo():
+    os.system('clear')
+    print()
+    print("############################################")
+    print("#####        Reservar Veículo          #####")
+    print("############################################")
+    print()
+    input("Tecle <ENTER> para continuar...")
+
+def veiculosDisponiveis():
+    os.system('clear')
+    print()
+    print("############################################")
+    print("#####  Lista de Veículos Disponíveis   #####")
+    print("############################################")
+    print()
+    input("Tecle <ENTER> para continuar...")
+
+def politicaCombustivel():
+    os.system('clear')
+    print()
+    print("##########################################################")
+    print("#####            Política de Combustível             #####")
+    print("##########################################################")
+    print("""
+        Prezado Cliente,
+
+        Gostaríamos de informar que, de acordo com nossas políticas de 
+        aluguel de carros, é obrigatório que os veículos alugados sejam
+        devolvidos com o tanque de combustível cheio. Este procedimento 
+        é essencial para garantir a melhor experiência de locação para
+        todos os nossos clientes.
+
+        Agradecemos antecipadamente pela sua cooperação e compreensão.
+        Se você tiver alguma dúvida ou precisar de assistência adicional,
+        não hesite em entrar em contato conosco. Estamos aqui para ajudar!
+        
+        Atenciosamente,
+        [João Roberto Galvão Aquino]
+        [Locadora de Carros - Crystal]""")
+    print()
+    input("\nTecle <ENTER> para continuar...")
 
 
 #############################################
@@ -449,10 +492,10 @@ def veiculos_mais_procurados():
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
     print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |")
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|")
     print()
     input("Tecle <ENTER> para continuar...")
-   
+
 ##############################################
 #####         Módulo Informações         #####    
 ##############################################

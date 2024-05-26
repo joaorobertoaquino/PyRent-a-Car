@@ -23,11 +23,14 @@ from funcoes import (
     lista_geral_clientes,
     lista_geral_funcionarios,
     lista_geral_veiculos,
-    veiculos_mais_procurados
+    veiculos_mais_procurados,
+    reservarVeiculo,
+    veiculosDisponiveis,
+    politicaCombustivel
 )
 
 ###################################################
-##### Projeto - Locadora de Carros - Versão 4 #####
+##### Projeto - Locadora de Carros - Crystal  #####
 ###################################################
 op_pric = ''
 while op_pric != '0':
@@ -46,12 +49,12 @@ while op_pric != '0':
         alterarDadosCliente() 
       elif op_cliente == '4':
         excluirCliente()
-   
+  
   elif op_pric == '2':
     op_func = ''
     while op_func != '0':
       op_func = modFunc()
-           
+      
       if op_func == '1':
         cadastrarFunc()
       elif op_func == '2':
@@ -74,17 +77,23 @@ while op_pric != '0':
         alterarDadosVeic()
       elif op_veic == '4':
         excluirVeic()
-    
+
   elif op_pric == '4':
-   op_reserva = ''
-   while op_reserva != '0':
-     op_reserva = modReserva()
+    op_reserva = ''
+    while op_reserva != '0':
+      op_reserva = modReserva()
+      
+      if op_reserva == '1':
+        reservarVeiculo()
+      elif op_reserva == '2':
+        veiculosDisponiveis()
+      elif op_reserva == '3':
+        politicaCombustivel()
 
   elif op_pric == '5':
     op_relatorio = ''
     while op_relatorio != '0':
       op_relatorio = modRelatorio()
-      print()
 
       if op_relatorio == '1':
         lista_geral_clientes()
