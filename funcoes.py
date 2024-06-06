@@ -1,7 +1,7 @@
 import os
 import pickle
-from dicionarios import cliente, funcionarios, veiculos
-from datetime import datetime
+from datetime import datetime, timedelta
+from dicionarios import cliente, funcionarios, veiculos_disponiveis, veiculos_alugados, alugueis_por_veiculo
 
 ########################################################
 #####            Escrever Arquivos                 #####
@@ -15,16 +15,23 @@ def escreverArquivos():
     pickle.dump(funcionarios, arq_funcionarios)
     arq_funcionarios.close()
 
-    arq_veiculos = open("veiculos.dat", "wb")
-    pickle.dump(veiculos, arq_veiculos)
-    arq_veiculos.close()
+    arq_veiculos_disponiveis = open("veiculos_disponiveis.dat", "wb")
+    pickle.dump(veiculos_disponiveis, arq_veiculos_disponiveis)
+    arq_veiculos_disponiveis.close()
 
+    arq_veiculos_alugados = open("veiculos_alugados.dat", "wb")
+    pickle.dump(veiculos_alugados, arq_veiculos_alugados)
+    arq_veiculos_alugados.close()
+
+    arq_alugueis_por_veiculo = open("alugueis_por_veiculo.dat", "wb")
+    pickle.dump(alugueis_por_veiculo, arq_alugueis_por_veiculo)
+    arq_alugueis_por_veiculo.close()
 
 ########################################################
 #####                Menu Pricipal                 #####
 ########################################################
 def menuPrincipal():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print("############################################")
     print("######      Locadora de Carros        ######")
     print("############################################")
@@ -43,7 +50,7 @@ def menuPrincipal():
 #####          Módulo Cliente             #####  
 ############################################### 
 def modCliente():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("#############################################")
     print("#####    Você está no Módulo Cliente    #####")
@@ -57,7 +64,7 @@ def modCliente():
     return op_cliente
 
 def cadastrarCliente():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("#############################################")
     print("#####        Cadastrar Cliente         #####")
@@ -77,7 +84,7 @@ def cadastrarCliente():
     input("Tecle <ENTER> para continuar...")
 
 def exibirDadosCliente():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####     Exibir Dados do Cliente      #####")
@@ -95,29 +102,35 @@ def exibirDadosCliente():
     input("Tecle <ENTER> para continuar...")
 
 def alterarDadosCliente():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####      Alterar Dados do Cliente    #####")
     print("############################################")
     print()
-    cpf = input('Qual o CPF do cliente?')
+    cpf = input('Qual o CPF do Cliente? ')
     if cpf in cliente:
-        print('Informe os novos dados do cliente: ')
-        nome = input("##### Nome: ")
-        print()
-        email = input("##### Email: ")
-        print()
-        fone = input("##### Celular: ")
-        print()
-        cliente[cpf] = [nome,email,fone]
-        print("Dados alterados com sucesso!")
+        dadosCliente = cliente[cpf]
+        print("Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
+        nome = input(f"##### Nome ({dadosCliente[0]}): ").strip()
+        email = input(f"##### Email ({dadosCliente[1]}): ").strip()
+        fone = input(f"##### Celular ({dadosCliente[2]}): ").strip()
+        # Atualiza apenas os campos que não estão vazios, permitindo que a informação anterior continue a mesma.
+        if nome:
+            cliente[cpf][0] = nome
+        if email:
+            cliente[cpf][1] = email
+        if fone:
+            cliente[cpf][2] = fone
+
+        print('\nDados alterados com sucesso!')
     else:
-        print('Cliente inexistente!')
+        print('\nCliente inexistente!')
+    
     input("Tecle <ENTER> para continuar...")
 
 def excluirCliente():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####         Excluir Cliente          #####")
@@ -129,8 +142,8 @@ def excluirCliente():
         print("##### Email: ", cliente[cpf][1])
         print("##### Celular: ", cliente[cpf][2])
         print()
-        resp = input('Tem certeza que deseja excluir este cliente? (S/N)?')
-        if resp.upper() == 'S':
+        resp = input('Tem certeza que deseja excluir este cliente (Sim/Não)?')
+        if resp.upper() == 'SIM':
             del cliente[cpf]
             print("Aluno excluído com sucesso!")
         else:
@@ -144,7 +157,7 @@ def excluirCliente():
 #####          Módulo Funcionários        #####        
 ###############################################    
 def modFunc():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("#############################################")
     print("##### Você está no Módulo Funcionários  #####")
@@ -158,7 +171,7 @@ def modFunc():
     return op_func
 
 def cadastrarFunc():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("#############################################")
     print("#####      Cadastrar Funcionário        #####")
@@ -178,7 +191,7 @@ def cadastrarFunc():
     input("Tecle <ENTER> para continuar...")
 
 def exibirDadosFunc():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####   Exibir Dados do Funcionário    #####")
@@ -196,7 +209,7 @@ def exibirDadosFunc():
     input("Tecle <ENTER> para continuar...")
 
 def alterarDadosFunc():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####   Alterar Dados do Funcionário   #####")
@@ -204,21 +217,26 @@ def alterarDadosFunc():
     print()
     cpf = input('Qual o CPF do funcionário(a)? ')
     if cpf in funcionarios:
-        print('Informe os novos dados do funcionário(a): ')
-        nome = input("##### Nome: ")
-        print()
-        email = input("##### Email: ")
-        print()
-        fone = input("##### Celular: ")
-        print()
-        funcionarios[cpf] = [nome,email,fone]
-        print('Dados alterados com sucesso!')
+        dadosFuncionarios = funcionarios[cpf]
+        print("Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
+        nome = input(f"##### Nome ({dadosFuncionarios[0]}: )").strip()
+        email = input(f"##### Email ({dadosFuncionarios[1]}): ").strip()
+        fone = input(f"##### Celular ({dadosFuncionarios[2]}): ").strip()
+        # Atualiza apenas os campos que não estão vazios, permitindo que a informação anterior continue a mesma.
+        if nome:
+            funcionarios[cpf][0] = nome
+        if email:
+            funcionarios[cpf][1] = email
+        if fone:
+            funcionarios[cpf][2] = fone
+        print('\nDados alterados com sucesso!')
     else:
-        print('Funcionário(a) inexistente!')
+        print('\nFuncionário(a) inexistente!')
+
     input("Tecle <ENTER> para continuar...")
 
 def excluirFunc():
-    os.system("clear")
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####       Excluir Funcionário        #####")
@@ -230,8 +248,8 @@ def excluirFunc():
         print("##### Email: ", funcionarios[cpf][1])
         print("##### Celular: ", funcionarios[cpf][2])
         print()
-        resp = input('Tem certeza que deseja excluir este funcionário(a)? (S/N)')
-        if resp.upper() == 'S':
+        resp = input('Tem certeza que deseja excluir este funcionário(a)? (Sim/Não)')
+        if resp.upper() == 'SIM':
             del funcionarios[cpf]
             print("Funcionário(a) excluído com sucesso!")
         else:
@@ -245,7 +263,7 @@ def excluirFunc():
 #####         Módulo Veículos         #####         
 ###########################################
 def modVeic():
-    os.system('clear')    
+    os.system('clear' if os.name == 'posix' else 'cls')   
     print()
     print("############################################")
     print("#####         Módulo Veículos          #####")
@@ -259,7 +277,7 @@ def modVeic():
     return op_veic
 
 def cadastrarVeic():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####        Cadastrar Veículo         #####")
@@ -276,75 +294,95 @@ def cadastrarVeic():
     placa = input("##### Número da placa: ")
     print()
     data = datetime.now()
-    veiculos[placa] = [marca,modelo,ano,cor,data.strftime("%x, %X")]
-    print("Veículo cadastrado com sucesso!")
+    veiculos_disponiveis[placa] = [marca,modelo,ano,cor,data.strftime("%x, %X")]
+    print(f"Veículo {modelo} cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
 def exibirDadosVeic():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####    Exibir Dados do Veículo       #####")
     print("############################################")
     print()
-    placa = input('Informe a placa do veículo? ')
-    if placa in veiculos:
-        print("##### Marca: ", veiculos[placa][0])
-        print("##### Modelo: ", veiculos[placa][1])
-        print("##### Ano de lançamento: ", veiculos[placa][2])
-        print("##### Cor: ", veiculos[placa][3])
-        print("##### Número da placa: ", placa)
+    placa = input("Digite a placa do veículo: ")
+    if placa in veiculos_disponiveis:
+        dados = veiculos_disponiveis[placa]
+        print(f"##### Marca: {dados[0]}")
+        print(f"##### Modelo: {dados[1]}")
+        print(f"##### Ano: {dados[2]}")
+        print(f"##### Cor: {dados[3]}")
+        print(f"##### Cadastro: {dados[4]}")
+        
+    elif placa in veiculos_alugados:
+        dados = veiculos_alugados[placa]
+        print(f"##### Marca: {dados[0]}")
+        print(f"##### Modelo: {dados[1]}")
+        print(f"##### Ano: {dados[2]}")
+        print(f"##### Cor: {dados[3]}")
+        print(f"##### Cadastro: {dados[4]}")
+        
     else:
-        print('Veículo inexistente!')
-    print()
-    input("Tecle <ENTER> para continuar...")
+        print("Veículo não encontrado.")
+    input("\nPressione Enter para voltar ao menu...")
+
+
 
 def alterarDadosVeic():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####    Alterar Dados do Veículo      #####")
     print("############################################")
     print()
     placa = input('Informe a placa do veículo: ')
-    if placa in veiculos:
-        print('Informe os novos dados do veículo: ')
-        marca = input("##### Marca: ")
-        print()
-        modelo = input("##### Modelo: ")
-        print()
-        ano = input("##### Ano de lançamento: ")
-        print()
-        cor = input("##### Cor: ")
-        print()
-        veiculos[placa] = [marca,modelo,ano,cor]
-        print("Dados alterados com sucesso!")
+    respExcluirDados = input("Deseja mesmo continuar com essa ação (Sim / Não)? ")
+    if respExcluirDados.upper() == 'SIM':
+        if (placa in veiculos_disponiveis) or (placa in veiculos_alugados):
+            if placa in veiculos_disponiveis:
+                veiculo = veiculos_disponiveis[placa]
+            else:
+                veiculo = veiculos_alugados[placa][:5]
+            
+            print("Deixe o campo em branco para não alterar a informação.")
+            marca = input(f"Marca ({veiculo[0]}): ") or veiculo[0]
+            modelo = input(f"Modelo ({veiculo[1]}): ") or veiculo[1]
+            ano = input(f"Ano ({veiculo[2]}): ") or veiculo[2]
+            cor = input(f"Cor ({veiculo[3]}): ") or veiculo[3]
+
+            if placa in veiculos_disponiveis:
+                veiculos_disponiveis[placa] = [marca, modelo, ano, cor, veiculo[4]]
+            else:
+                veiculos_alugados[placa][:5] = [marca, modelo, ano, cor, veiculo[4]]
+            print(f"Dados do veículo {modelo} atualizados com sucesso!")
+
+        else:
+            print("Veículo não encontrado!")
     else:
-        print('Veículo inexistente!')
+        print("Ação não concluída!")
+
     input("Tecle <ENTER> para continuar...")
 
 def excluirVeic():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####       Excluir Veículo            #####")
     print("############################################")
     print()
     placa = input('Informe a placa do veículo: ')
-    if placa in veiculos:
-        print("##### Marca: ", veiculos[placa][0])
-        print("##### Modelo: ", veiculos[placa][1])
-        print("##### Ano de lançamento: ", veiculos[placa][2])
-        print("##### Cor: ", veiculos[placa][3])
-        print()
-        resp = input('Tem certeza que deseja excluir este veículo? (S/N)')
-        if resp.upper() == 'S':
-            del veiculos[placa]
-            print("Veículo excluído com sucesso!")
+    respExcluir = input("Deseja mesmo completar essa ação (Sim / Não)? ")
+    if respExcluir.upper() == 'SIM':
+        if placa in veiculos_disponiveis:
+            del veiculos_disponiveis[placa]
+            print(f"Veículo com placa {placa} excluído com sucesso!")
+        elif placa in veiculos_alugados:
+            del veiculos_alugados[placa]
+            print(f"Veículo com placa {placa} excluído com sucesso!")
         else:
-            print('Exclusão não realizada!')
+            print("Veículo não encontrado.")
     else:
-        print('Veículo inexistente!')
+        print("Ação não concluída!")
     input("Tecle <ENTER> para continuar...")
 
 
@@ -352,42 +390,113 @@ def excluirVeic():
 #####          Módulo Reserva          #####        
 ############################################
 def modReserva():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("#############################################")
     print("#####   Você está no Módulo Reserva     #####")
     print("#############################################")
     print("##### 1 - Reservar Veículo              #####")
-    print("##### 2 - Lista de Veículos Disponíveis #####")
-    print("##### 3 - Política de Combustível       #####")
+    print("##### 2 - Devolver Veículo              #####")
+    print("##### 3 - Veículos Disponíveis          #####")
+    print("##### 4 - Veículos Alugados             #####")
+    print("##### 5 - Política de Combustível       #####")
     print("##### 0 - Retornar ao Menu Principal    #####")
     op_reserva = input("##### Escolha sua opção: ")
     return op_reserva
 
 def reservarVeiculo():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
     print("#####        Reservar Veículo          #####")
     print("############################################")
     print()
+    placa = input("Digite a placa do veículo a ser alugado: ")
+    if placa in veiculos_disponiveis:
+        dias = int(input("Por quantos dias o veículo será alugado? "))
+        data_inicio = datetime.now().strftime("%x, %X")
+        data_fim = (datetime.now() + timedelta(days=dias)).strftime("%x, %X")
+        veiculo = veiculos_disponiveis.pop(placa)
+        veiculo.extend([data_inicio, data_fim])
+        veiculos_alugados[placa] = veiculo
+
+        # if placa in alugueis_por_veiculo:
+        #     alugueis_por_veiculo[placa] += 1
+        # else:
+        #     alugueis_por_veiculo[placa] = 1
+
+        print(f"Veículo {veiculo[1]} alugado com sucesso até {data_fim}!")
+    else:
+        print("Veículo não encontrado ou já está alugado.")
     input("Tecle <ENTER> para continuar...")
 
-def veiculosDisponiveis():
-    os.system('clear')
+def devolverVeiculo():
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("############################################")
-    print("#####  Lista de Veículos Disponíveis   #####")
+    print("#####        Devolver Veículo          #####")
     print("############################################")
+    print()
+    placa = input("Digite a placa do veículo a ser devolvido: ")
+    respDevolver = input("Deseja mesmo continuar (Sim/Não)? ")
+    if placa in veiculos_alugados:
+        veiculo = veiculos_alugados.pop(placa)
+        veiculo = veiculo[:5]  # Remove as informações de aluguel
+        veiculos_disponiveis[placa] = veiculo
+        print(f"Veículo {veiculo[1]} devolvido com sucesso!")
+    else:
+        print("Veículo não encontrado ou não está alugado.")
+    
+    input("Tecle <ENTER> para continuar...")
+
+
+def veiculosDisponiveis():
+    os.system('clear' if os.name == 'posix' else 'cls')
+    print()
+    print("#########################################################################################################################")
+    print("#####                                        Lista de Veículos Disponíveis                                          #####")
+    print("#########################################################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
+    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |  Data do Cadastro  |")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
+    for placa, dados in veiculos_disponiveis.items():
+        print("| %-9s "%placa, end='')
+        print("| %-27s "%dados[0], end='')
+        print("| %-18s "%dados[1], end='')
+        print("| %-15s "%dados[2], end='')
+        print("| %-15s "%dados[3], end='')
+        print("| %-15s |"%dados[4])
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
+    print()
+    input("Tecle <ENTER> para continuar...")
+
+def veiculosAlugados():
+    os.system('clear' if os.name == 'posix' else 'cls')
+    print()
+    print("#################################################################################################################################################")
+    print("#######################                                     Lista de Veículos Alugados                                    #######################")
+    print("#################################################################################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|---------------------|----------------------|")
+    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |   Data do ALuguel   |  Data de Devolução   |")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|---------------------|----------------------|")
+    for placa, dados in veiculos_alugados.items():
+        print("| %-9s "%placa, end='')
+        print("| %-27s "%dados[0], end='')
+        print("| %-18s "%dados[1], end='')
+        print("| %-15s "%dados[2], end='')
+        print("| %-15s "%dados[3], end='')
+        print("| %-19s "%dados[5], end='')
+        print("| %-20s |"%dados[6])
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|---------------------|----------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
 def politicaCombustivel():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
-    print("##########################################################")
-    print("#####            Política de Combustível             #####")
-    print("##########################################################")
+    print("####################################################################################")
+    print("#####                         Política de Combustível                          #####")
+    print("####################################################################################")
     print("""
         Prezado Cliente,
 
@@ -412,7 +521,7 @@ def politicaCombustivel():
 #####         Módulo Relatório          #####   
 #############################################
 def modRelatorio():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("#############################################")
     print("#####   Você está no Módulo Relatório   #####")
@@ -426,7 +535,7 @@ def modRelatorio():
     return op_relatorio 
 
 def lista_geral_clientes():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("###################################################################################################################################")
     print("#######################                               Lista Geral de Clientes                               #######################")
@@ -445,7 +554,7 @@ def lista_geral_clientes():
     input("Tecle <ENTER> para continuar...")
 
 def lista_geral_funcionarios():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("###################################################################################################################################")
     print("#######################                             Lista Geral de Funcionários                             #######################")
@@ -464,7 +573,7 @@ def lista_geral_funcionarios():
     input("Tecle <ENTER> para continuar...")
 
 def lista_geral_veiculos():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("#########################################################################################################################")
     print("#######################                          Lista Geral de Veículos                          #######################")
@@ -472,19 +581,28 @@ def lista_geral_veiculos():
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
     print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |  Data do Cadastro  |")
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
-    for placa in veiculos:
-        print("| %-9s "%(placa), end='')
-        print("| %-27s "%(veiculos[placa][0]), end='')
-        print("| %-18s "%(veiculos[placa][1]), end='')
-        print("| %-15s "%(veiculos[placa][2]), end='')
-        print("| %-15s "%(veiculos[placa][3]), end='')
-        print("| %-15s |"%(veiculos[placa][4]))
+    #veículos disponíveis
+    for placa, dados in veiculos_disponiveis.items():
+        print("| %-9s "%placa, end='')
+        print("| %-27s "%dados[0], end='')
+        print("| %-18s "%dados[1], end='')
+        print("| %-15s "%dados[2], end='')
+        print("| %-15s "%dados[3], end='')
+        print("| %-15s |"%dados[4])
+    #veículos alugados
+    for placa, dados in veiculos_alugados.items():
+        print("| %-9s "%placa, end='')
+        print("| %-27s "%dados[0], end='')
+        print("| %-18s "%dados[1], end='')
+        print("| %-15s "%dados[2], end='')
+        print("| %-15s "%dados[3], end='')
+        print("| %-15s |"%dados[4])
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
     print()
     input("Tecle <ENTER> para continuar...") 
 
 def veiculos_mais_procurados():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("####################################################################################################")
     print("#######################               Veículos Mais Procurados               #######################")
@@ -492,7 +610,21 @@ def veiculos_mais_procurados():
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
     print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |")
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|")
+    #Adicionar comentário ctrl + k , e ctrl + c.
+    #Desfazer ctrl + k , ctrl + u.
+    # lista = alugueis_por_veiculo.values()
+    # lista.sort(reverse=True)
+    # for i in range(5):
+    #     for placa in alugueis_por_veiculo:
+    #         if alugueis_por_veiculo[placa] == lista[i]:
+    #             print(placa,alugueis_por_veiculo[placa])
+    #             break
+    #             print("| %-9s "%placa, end='')
+    #             print("| %-27s "%alugueis_por_veiculo[placa][0], end='')
+    #             print("| %-18s "%alugueis_por_veiculo[placa][1], end='')
+    #             print("| %-15s "%alugueis_por_veiculo[placa][2], end='')
+    #             print("| %-15s "%alugueis_por_veiculo[placa][3],)
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
@@ -500,15 +632,19 @@ def veiculos_mais_procurados():
 #####         Módulo Informações         #####    
 ##############################################
 def modInfo():
-    os.system('clear')
+    os.system('clear' if os.name == 'posix' else 'cls')
     print()
-    print("#############################################")
-    print("#####  Você está no Módulo Informações  #####")
-    print("#############################################")
-    print("##### Projeto   -  Locadora de Veículos #####")
-    print("##### Desenvolvimento:                  #####")
-    print("##### João Roberto Galvão Aquino        #####")
-    print("##### E-mail para comunicação:          #####")
-    print("##### joao.roberto.galvao.017@gmail.com #####")
+    print("###################################################")
+    print("#####     Você está no Módulo Informações     #####")
+    print("###################################################")
+    print("#####                                         #####")
+    print("#####  Projeto: Locadora de Veículos          #####")
+    print("#####  Desenvolvimento:                       #####")
+    print("#####  João Roberto Galvão Aquino             #####")
+    print("#####                                         #####")
+    print("#####  E-mail para comunicação:               #####")
+    print("#####  joao.roberto.galvao.017@gmail.com      #####")
+    print("#####                                         #####")
+    print("###################################################")
     print()
     input("Tecle <ENTER> para voltar ao menu principal...")

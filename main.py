@@ -26,7 +26,9 @@ from funcoes import (
     veiculos_mais_procurados,
     reservarVeiculo,
     veiculosDisponiveis,
-    politicaCombustivel
+    politicaCombustivel,
+    veiculosAlugados,
+    devolverVeiculo
 )
 
 ###################################################
@@ -86,8 +88,12 @@ while op_pric != '0':
       if op_reserva == '1':
         reservarVeiculo()
       elif op_reserva == '2':
-        veiculosDisponiveis()
+        devolverVeiculo()
       elif op_reserva == '3':
+        veiculosDisponiveis()
+      elif op_reserva == '4':
+        veiculosAlugados()
+      elif op_reserva == '5':
         politicaCombustivel()
 
   elif op_pric == '5':
