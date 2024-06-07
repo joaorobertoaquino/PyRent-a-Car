@@ -2,21 +2,25 @@ import pickle
 from collections import Counter
 
 cliente = {
-  '22233344455': ['João Roberto', 'joaoroberto@gmail.com', '(84) 998011505', '00:00:00']
+  '22233344455': ['João Roberto', 'joaoroberto@gmail.com', '(84) 998011505', '07/10/2005', '00:00:00']
 }
 funcionarios = {
-  '22233344455': ['Alberto', 'albertoroberto@gmail.com', '(84) 998011506', '00:00:00']
+  '22233344455': ['Alberto', 'albertoroberto@gmail.com', '(84) 998011506', '02/04/2000', '00:00:00']
 }
 veiculos_disponiveis = {
-  'BEE4R22': ['Chevrolet', 'Onix', '2020', 'Branco', '00:00:00']
+  'BEE4R22': ['Chevrolet', 'Onix', '2020', 'Branco', 'A', '00/00/000', '00:00:00']
 }
 veiculos_alugados = {
-  'BEE5T23': ['Chevrolet', 'Onix', '2023', 'Preto', '00:00:00']
+  'BEE5T23': ['Chevrolet', 'Onix', '2023', 'Preto', 'B', '06/26/24', '00:00:00', '06/10/2024', '06/10/2024']
 }
 alugueis_por_veiculo = {
   "FGH4D29": 5,
-}  # Dicionário para contar o número de alugueis de cada veículo
+}  # Dicionário para contar o número de alugueis de cada veículo. 
 
+valor_aluguel = {
+  "A" : 120.00,
+  "B" : 150.00
+} #Dicionário para contar os números de vezes que os veículos fora, alugados.
 
 #########################################################
 #####            Carregar Dados                     #####
@@ -60,3 +64,4 @@ try:
 except:
   arq_alugueis_por_veiculo = open("alugeuis_por_veiculo.dat", "wb")
 arq_alugueis_por_veiculo.close()
+

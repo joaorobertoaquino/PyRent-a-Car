@@ -1,7 +1,7 @@
 import os
 import pickle
 from datetime import datetime, timedelta
-from dicionarios import cliente, funcionarios, veiculos_disponiveis, veiculos_alugados, alugueis_por_veiculo
+from dicionarios import cliente, funcionarios, veiculos_disponiveis, veiculos_alugados, alugueis_por_veiculo, valor_aluguel
 
 ########################################################
 #####            Escrever Arquivos                 #####
@@ -78,8 +78,10 @@ def cadastrarCliente():
     print()
     fone = input("##### Celular: ")
     print()
+    dataNascimento = input("##### Data de nascimento (00/00/0000): ")
+    print()
     data = datetime.now()
-    cliente[cpf] = [nome,email,fone,data.strftime("%x, %X")]
+    cliente[cpf] = [nome,email,fone,dataNascimento, data.strftime("%x, %X")]
     print("Cliente cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -90,12 +92,13 @@ def exibirDadosCliente():
     print("#####     Exibir Dados do Cliente      #####")
     print("############################################")
     print()
-    cpf = input('Qual o CPF do cliente?')
+    cpf = input('Qual o CPF do cliente? ')
     if cpf in cliente:
         print("##### Nome: ", cliente[cpf][0])
         print("##### CPF: ", cpf)
         print("##### Email: ", cliente[cpf][1])
         print("##### Celular: ", cliente[cpf][2])
+        print("##### Data de Nascimento: ", cliente[cpf][3])
     else:
         print('Cliente inexistente!')
     print()
@@ -115,6 +118,7 @@ def alterarDadosCliente():
         nome = input(f"##### Nome ({dadosCliente[0]}): ").strip()
         email = input(f"##### Email ({dadosCliente[1]}): ").strip()
         fone = input(f"##### Celular ({dadosCliente[2]}): ").strip()
+        dataNascimento = input(f"##### Data de Nascimento ({dadosCliente[3]}): ").strip()
         # Atualiza apenas os campos que não estão vazios, permitindo que a informação anterior continue a mesma.
         if nome:
             cliente[cpf][0] = nome
@@ -122,6 +126,8 @@ def alterarDadosCliente():
             cliente[cpf][1] = email
         if fone:
             cliente[cpf][2] = fone
+        if dataNascimento:
+            cliente[cpf][3] = dataNascimento
 
         print('\nDados alterados com sucesso!')
     else:
@@ -141,6 +147,7 @@ def excluirCliente():
         print("##### Nome: ", cliente[cpf][0])
         print("##### Email: ", cliente[cpf][1])
         print("##### Celular: ", cliente[cpf][2])
+        print("##### Data de Nascimento: ", cliente[cpf][3])
         print()
         resp = input('Tem certeza que deseja excluir este cliente (Sim/Não)?')
         if resp.upper() == 'SIM':
@@ -185,8 +192,10 @@ def cadastrarFunc():
     print()
     fone = input("##### Celular: ")
     print()
+    dataNascimento = input("##### Data de Nascimento (00/00/0000): ")
+    print()
     data = datetime.now()
-    funcionarios[cpf] = [nome,email,fone,data.strftime("%x, %X")]
+    funcionarios[cpf] = [nome,email,fone,dataNascimento,data.strftime("%x, %X")]
     print("Funcionário cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -203,6 +212,7 @@ def exibirDadosFunc():
         print("##### CPF: ", cpf)
         print("##### Email: ", funcionarios[cpf][1])
         print("##### Celular: ", funcionarios[cpf][2])
+        print("##### Data de Nascimento: ", funcionarios[cpf][3])
     else:
         print('Funcionário(a) inexistente!')
     print()
@@ -222,6 +232,7 @@ def alterarDadosFunc():
         nome = input(f"##### Nome ({dadosFuncionarios[0]}: )").strip()
         email = input(f"##### Email ({dadosFuncionarios[1]}): ").strip()
         fone = input(f"##### Celular ({dadosFuncionarios[2]}): ").strip()
+        dataNascimento = input(f"##### Data de Nascimento ({dadosFuncionarios[3]}): ").strip()
         # Atualiza apenas os campos que não estão vazios, permitindo que a informação anterior continue a mesma.
         if nome:
             funcionarios[cpf][0] = nome
@@ -229,6 +240,9 @@ def alterarDadosFunc():
             funcionarios[cpf][1] = email
         if fone:
             funcionarios[cpf][2] = fone
+        if dataNascimento:
+            funcionarios[cpf][3] = dataNascimento
+        
         print('\nDados alterados com sucesso!')
     else:
         print('\nFuncionário(a) inexistente!')
@@ -247,6 +261,7 @@ def excluirFunc():
         print("##### Nome: ", funcionarios[cpf][0])
         print("##### Email: ", funcionarios[cpf][1])
         print("##### Celular: ", funcionarios[cpf][2])
+        print("##### Data de Nascimento: ", funcionarios[cpf][3])
         print()
         resp = input('Tem certeza que deseja excluir este funcionário(a)? (Sim/Não)')
         if resp.upper() == 'SIM':
@@ -293,8 +308,10 @@ def cadastrarVeic():
     print()
     placa = input("##### Número da placa: ")
     print()
+    categoria = input("##### Informe a categoria do carro: ")
+    print()
     data = datetime.now()
-    veiculos_disponiveis[placa] = [marca,modelo,ano,cor,data.strftime("%x, %X")]
+    veiculos_disponiveis[placa] = [marca,modelo,ano,cor,categoria, data.strftime("%d/%m/%Y"), data.strftime("%H:%M:%S")]
     print(f"Veículo {modelo} cadastrado com sucesso!")
     input("Tecle <ENTER> para continuar...")
 
@@ -312,7 +329,8 @@ def exibirDadosVeic():
         print(f"##### Modelo: {dados[1]}")
         print(f"##### Ano: {dados[2]}")
         print(f"##### Cor: {dados[3]}")
-        print(f"##### Cadastro: {dados[4]}")
+        print(f"##### Categoria: {dados[4]}")
+        print(f"##### Cadastro: {dados[5]} às {dados[6]}")
         
     elif placa in veiculos_alugados:
         dados = veiculos_alugados[placa]
@@ -320,7 +338,8 @@ def exibirDadosVeic():
         print(f"##### Modelo: {dados[1]}")
         print(f"##### Ano: {dados[2]}")
         print(f"##### Cor: {dados[3]}")
-        print(f"##### Cadastro: {dados[4]}")
+        print(f"##### Categoria: {dados[4]}")
+        print(f"##### Cadastro: {dados[5]} às {dados[6]}")
         
     else:
         print("Veículo não encontrado.")
@@ -349,11 +368,12 @@ def alterarDadosVeic():
             modelo = input(f"Modelo ({veiculo[1]}): ") or veiculo[1]
             ano = input(f"Ano ({veiculo[2]}): ") or veiculo[2]
             cor = input(f"Cor ({veiculo[3]}): ") or veiculo[3]
+            categoria = input(f"Categoria ({veiculo[4]}): ") or veiculo[4]
 
             if placa in veiculos_disponiveis:
-                veiculos_disponiveis[placa] = [marca, modelo, ano, cor, veiculo[4]]
+                veiculos_disponiveis[placa] = [marca, modelo, ano, cor, categoria, veiculo[5]]
             else:
-                veiculos_alugados[placa][:5] = [marca, modelo, ano, cor, veiculo[4]]
+                veiculos_alugados[placa][:6] = [marca, modelo, ano, cor, categoria, veiculo[5]]
             print(f"Dados do veículo {modelo} atualizados com sucesso!")
 
         else:
@@ -414,21 +434,24 @@ def reservarVeiculo():
     placa = input("Digite a placa do veículo a ser alugado: ")
     if placa in veiculos_disponiveis:
         dias = int(input("Por quantos dias o veículo será alugado? "))
-        data_inicio = datetime.now().strftime("%x, %X")
-        data_fim = (datetime.now() + timedelta(days=dias)).strftime("%x, %X")
+        data_inicio = datetime.now().strftime("%d/%m/%Y")
+        data_fim = (datetime.now() + timedelta(days=dias)).strftime("%d/%m/%Y")
         veiculo = veiculos_disponiveis.pop(placa)
+        preco = valor_aluguel[veiculo[4]]
         veiculo.extend([data_inicio, data_fim])
         veiculos_alugados[placa] = veiculo
 
-        # if placa in alugueis_por_veiculo:
-        #     alugueis_por_veiculo[placa] += 1
-        # else:
-        #     alugueis_por_veiculo[placa] = 1
+        print("Preço da diária: R$ ", preco)
 
-        print(f"Veículo {veiculo[1]} alugado com sucesso até {data_fim}!")
+        if placa in alugueis_por_veiculo:
+            alugueis_por_veiculo[placa] += 1
+        else:
+            alugueis_por_veiculo[placa] = 1
+
+        print(f"\nVeículo {veiculo[1]} alugado com sucesso até {data_fim}!")
     else:
         print("Veículo não encontrado ou já está alugado.")
-    input("Tecle <ENTER> para continuar...")
+    input("\nTecle <ENTER> para continuar...")
 
 def devolverVeiculo():
     os.system('clear' if os.name == 'posix' else 'cls')
@@ -441,7 +464,7 @@ def devolverVeiculo():
     respDevolver = input("Deseja mesmo continuar (Sim/Não)? ")
     if placa in veiculos_alugados:
         veiculo = veiculos_alugados.pop(placa)
-        veiculo = veiculo[:5]  # Remove as informações de aluguel
+        veiculo = veiculo[:7]  # Remove as informações de aluguel
         veiculos_disponiveis[placa] = veiculo
         print(f"Veículo {veiculo[1]} devolvido com sucesso!")
     else:
@@ -453,41 +476,44 @@ def devolverVeiculo():
 def veiculosDisponiveis():
     os.system('clear' if os.name == 'posix' else 'cls')
     print()
-    print("#########################################################################################################################")
-    print("#####                                        Lista de Veículos Disponíveis                                          #####")
-    print("#########################################################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
-    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |  Data do Cadastro  |")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
+    print("########################################################################################################################################################")
+    print("#####                                                      Lista de Veículos Disponíveis                                                           #####")
+    print("########################################################################################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|--------------------|------------------|")
+    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       | Categoria |  Data do Cadastro  |      Horário     |")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|--------------------|------------------|")
     for placa, dados in veiculos_disponiveis.items():
         print("| %-9s "%placa, end='')
         print("| %-27s "%dados[0], end='')
         print("| %-18s "%dados[1], end='')
         print("| %-15s "%dados[2], end='')
         print("| %-15s "%dados[3], end='')
-        print("| %-15s |"%dados[4])
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
+        print("| %-9s "%dados[4], end='')
+        print("| %-18s "%dados[5], end='')
+        print("| %-16s |"%dados[6])
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|--------------------|------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
 def veiculosAlugados():
     os.system('clear' if os.name == 'posix' else 'cls')
     print()
-    print("#################################################################################################################################################")
-    print("#######################                                     Lista de Veículos Alugados                                    #######################")
-    print("#################################################################################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|---------------------|----------------------|")
-    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |   Data do ALuguel   |  Data de Devolução   |")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|---------------------|----------------------|")
+    print("#############################################################################################################################################################")
+    print("#######################                                           Lista de Veículos Alugados                                          #######################")
+    print("#############################################################################################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|---------------------|----------------------|")
+    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       | Categoria |   Data do Aluguel   |  Data de Devolução   |")
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|---------------------|----------------------|")
     for placa, dados in veiculos_alugados.items():
         print("| %-9s "%placa, end='')
         print("| %-27s "%dados[0], end='')
         print("| %-18s "%dados[1], end='')
         print("| %-15s "%dados[2], end='')
         print("| %-15s "%dados[3], end='')
-        print("| %-19s "%dados[5], end='')
-        print("| %-20s |"%dados[6])
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|---------------------|----------------------|")
+        print("| %-9s "%dados[4], end='')
+        print("| %-19s "%dados[7], end='')
+        print("| %-20s |"%dados[8])
+    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|---------------------|----------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
@@ -537,38 +563,40 @@ def modRelatorio():
 def lista_geral_clientes():
     os.system('clear' if os.name == 'posix' else 'cls')
     print()
-    print("###################################################################################################################################")
-    print("#######################                               Lista Geral de Clientes                               #######################")
-    print("###################################################################################################################################")
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
-    print("|     CPF     |            Nome Completo            |               E-mail               |     Celular     |   Data do Cadastro   |")
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
+    print("##########################################################################################################################################################")
+    print("#######################                                          Lista Geral de Clientes                                           #######################")
+    print("##########################################################################################################################################################")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
+    print("|     CPF     |            Nome Completo            |               E-mail               |     Celular     |  Data de Nascimento  |   Data do Cadastro   |")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
     for cpf in cliente:
         print("| %-9s "%(cpf), end='')
         print("| %-35s "%(cliente[cpf][0]), end='')
         print("| %-34s "%(cliente[cpf][1]), end='')
         print("| %-15s "%(cliente[cpf][2]), end='')
-        print("| %-20s |"%(cliente[cpf][3]))
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
+        print("| %-20s "%(cliente[cpf][3]), end='')
+        print("| %-20s |"%(cliente[cpf][4]))
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
 def lista_geral_funcionarios():
     os.system('clear' if os.name == 'posix' else 'cls')
     print()
-    print("###################################################################################################################################")
-    print("#######################                             Lista Geral de Funcionários                             #######################")
-    print("###################################################################################################################################")
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
-    print("|     CPF     |            Nome Completo            |               E-mail               |     Celular     |   Data do Cadastro   |")
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
+    print("##########################################################################################################################################################")
+    print("#######################                                        Lista Geral de Funcionários                                         #######################")
+    print("##########################################################################################################################################################")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
+    print("|     CPF     |            Nome Completo            |               E-mail               |     Celular     |  Data de Nascimento  |   Data do Cadastro   |")
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
     for cpf in funcionarios:
         print("| %-9s "%(cpf), end='')
         print("| %-35s "%(funcionarios[cpf][0]), end='')
         print("| %-34s "%(funcionarios[cpf][1]), end='')
         print("| %-15s "%(funcionarios[cpf][2]), end='')
-        print("| %-20s |"%(funcionarios[cpf][3]))
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|")
+        print("| %-20s "%(funcionarios[cpf][3]), end='')
+        print("| %-20s |"%(funcionarios[cpf][4]))
+    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
@@ -588,7 +616,8 @@ def lista_geral_veiculos():
         print("| %-18s "%dados[1], end='')
         print("| %-15s "%dados[2], end='')
         print("| %-15s "%dados[3], end='')
-        print("| %-15s |"%dados[4])
+        print("| %-9s "%dados[4], end='')
+        print("| %-15s |"%dados[5])
     #veículos alugados
     for placa, dados in veiculos_alugados.items():
         print("| %-9s "%placa, end='')
@@ -596,7 +625,8 @@ def lista_geral_veiculos():
         print("| %-18s "%dados[1], end='')
         print("| %-15s "%dados[2], end='')
         print("| %-15s "%dados[3], end='')
-        print("| %-15s |"%dados[4])
+        print("| %-9s "%dados[4], end='')
+        print("| %-15s |"%dados[5])
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|--------------------|")
     print()
     input("Tecle <ENTER> para continuar...") 
@@ -610,20 +640,24 @@ def veiculos_mais_procurados():
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
     print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |")
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
-    #Adicionar comentário ctrl + k , e ctrl + c.
-    #Desfazer ctrl + k , ctrl + u.
-    # lista = alugueis_por_veiculo.values()
-    # lista.sort(reverse=True)
-    # for i in range(5):
-    #     for placa in alugueis_por_veiculo:
-    #         if alugueis_por_veiculo[placa] == lista[i]:
-    #             print(placa,alugueis_por_veiculo[placa])
-    #             break
-    #             print("| %-9s "%placa, end='')
-    #             print("| %-27s "%alugueis_por_veiculo[placa][0], end='')
-    #             print("| %-18s "%alugueis_por_veiculo[placa][1], end='')
-    #             print("| %-15s "%alugueis_por_veiculo[placa][2], end='')
-    #             print("| %-15s "%alugueis_por_veiculo[placa][3],)
+    #tranformar em comentário ctrl + /
+    lista_placas = alugueis_por_veiculo.keys()
+    lista_alugueis = alugueis_por_veiculo.values()
+    tam = len(lista_placas)
+    for i in range(tam-1):
+        for j in range(i+1,tam):
+            if lista_alugueis[i]<lista_alugueis[j]:
+                variavelTemp = lista_alugueis[i]
+                lista_alugueis[i] = lista_alugueis[j]
+                lista_alugueis[j] = variavelTemp
+                
+                variavelTemp = lista_placas[i]
+                lista_placas[i] = lista_placas[j]
+                lista_placas[j] = variavelTemp
+
+    print(lista_placas, end='')
+    print(lista_alugueis)
+
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
     print()
     input("Tecle <ENTER> para continuar...")
