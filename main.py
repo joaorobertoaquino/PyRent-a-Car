@@ -1,4 +1,3 @@
-import os
 from funcoes import (
     alterarDadosFunc,
     cadastrarFunc,
@@ -28,7 +27,8 @@ from funcoes import (
     veiculosDisponiveis,
     politicaCombustivel,
     veiculosAlugados,
-    devolverVeiculo
+    devolverVeiculo,
+    historicoAlugueis
 )
 
 ###################################################
@@ -109,6 +109,8 @@ while op_pric != '0':
         lista_geral_veiculos()
       elif op_relatorio == '4':
         veiculos_mais_procurados()
+      elif op_relatorio == '5':
+        historicoAlugueis()
 
   elif op_pric == '6':
     op_pric = modInfo()

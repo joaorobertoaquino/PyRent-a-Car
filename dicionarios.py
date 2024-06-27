@@ -1,18 +1,37 @@
 import pickle
-from collections import Counter
 
-cliente = {
+clientes = {
   '22233344455': ['João Roberto', 'joaoroberto@gmail.com', '(84) 998011505', '07/10/2005', '00:00:00']
 }
 funcionarios = {
   '22233344455': ['Alberto', 'albertoroberto@gmail.com', '(84) 998011506', '02/04/2000', '00:00:00']
 }
-veiculos_disponiveis = {
-  'BEE4R22': ['Chevrolet', 'Onix', '2020', 'Branco', 'A', '00/00/000', '00:00:00']
+
+veiculos = {
+  'BEE5T23': {
+        'marca': 'Chevrolet',
+        'modelo': 'Onix',
+        'ano': '2023',
+        'cor': 'Preto',
+        'categoria': 'B',
+        'data_cadastro': '06/26/24',
+        'hora_cadastro': '00:00:00',
+        'alugado': True,
+        'data_inicio': '06/10/2024',
+        'data_fim': '06/10/2024',
+    }
 }
-veiculos_alugados = {
-  'BEE5T23': ['Chevrolet', 'Onix', '2023', 'Preto', 'B', '06/26/24', '00:00:00', '06/10/2024', '06/10/2024']
+
+historico_aluguel = {
+    "ABC1234": {
+        'cpf_cliente': '123.456.789-00',
+        'nome_cliente': 'João Roberto Galvão Aquino',
+        'data_fim': '06/12/2024',
+        'status': True  
+    }
 }
+
+
 alugueis_por_veiculo = {
   "FGH4D29": 5,
 }  # Dicionário para contar o número de alugueis de cada veículo. 
@@ -25,13 +44,22 @@ valor_aluguel = {
 #########################################################
 #####            Carregar Dados                     #####
 #########################################################
-cliente = {}
+
+historico_aluguel = {}
 try:
-  arq_cliente = open("cliente.dat", "rb")
-  cliente = pickle.load(arq_cliente)
+  arq_historico_aluguel = open("historico_aluguel.dat", "rb")
+  historico_aluguel = pickle.load(arq_historico_aluguel)
 except:
-  arq_cliente = open("cliente.dat", "wb")
-  arq_cliente.close()
+  arq_historico_aluguel = open("historico_aluguel.dat", "wb")
+  arq_historico_aluguel.close()
+
+clientes = {}
+try:
+  arq_clientes = open("clientes.dat", "rb")
+  clientes = pickle.load(arq_clientes)
+except:
+  arq_clientes = open("clientes.dat", "wb")
+  arq_clientes.close()
 
 funcionarios = {}
 try:
@@ -41,21 +69,13 @@ except:
   arq_funcionarios = open("funcionarios.dat", "wb")
 arq_funcionarios.close()
 
-veiculos_disponiveis ={}
+veiculos ={}
 try:
-  arq_veiculos_disponiveis = open("veiculos_disponiveis.dat", "rb")
-  veiculos_disponiveis = pickle.load(arq_veiculos_disponiveis)
+  arq_veiculos = open("veiculos.dat", "rb")
+  veiculos = pickle.load(arq_veiculos)
 except:
-  arq_veiculos_disponiveis = open("veiculos_disponiveis.dat", "wb")
-arq_veiculos_disponiveis.close()
-
-veiculos_alugados={}
-try:
-  arq_veiculos_alugados = open("veiculos_alugados.dat", "rb")
-  veiculos_alugados = pickle.load(arq_veiculos_alugados)
-except:
-  arq_veiculos_alugados = open("veiculos_alugados.dat", "wb")
-arq_veiculos_alugados.close()
+  arq_veiculos= open("veiculos_.dat", "wb")
+arq_veiculos.close()
 
 alugueis_por_veiculo={}
 try:
