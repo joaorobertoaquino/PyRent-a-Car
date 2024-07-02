@@ -1,0 +1,2 @@
+def validar_cpf():
+  

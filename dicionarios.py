@@ -31,7 +31,6 @@ historico_aluguel = {
     }
 }
 
-
 alugueis_por_veiculo = {
   "FGH4D29": 5,
 }  # Dicionário para contar o número de alugueis de cada veículo. 

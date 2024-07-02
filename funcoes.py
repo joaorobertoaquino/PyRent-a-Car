@@ -2,6 +2,21 @@ import os
 import pickle
 from datetime import datetime, timedelta
 from dicionarios import clientes, funcionarios, veiculos, alugueis_por_veiculo, valor_aluguel, historico_aluguel
+from interface import(
+    interface_principal,
+    interface_clientes,
+    interface_funcionarios,
+    interface_veiculos,
+    interface_reserva,
+    interface_relatorio,
+    interface_historico,
+    interface_informacoes,
+    interface_Veiculosalugados,
+    interface_Veiculosdisponiveis,
+    interface_Politicacombustivel
+)
+
+
 
 ########################################################
 #####            Escrever Arquivos                 #####
@@ -31,35 +46,15 @@ def escreverArquivos():
 #####                Menu Pricipal                 #####
 ########################################################
 def menuPrincipal():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print("############################################")
-    print("######      Locadora de Carros        ######")
-    print("############################################")
-    print("#####      1 - Módulo Clientes         #####")
-    print("#####      2 - Módulo Funcionários     #####")
-    print("#####      3 - Módulo Veículos         #####")
-    print("#####      4 - Módulo Reserva          #####")
-    print("#####      5 - Módulo Relatório        #####")
-    print("#####      6 - Módulo Informações      #####")
-    print("#####      0 - Sair                    #####")
+    interface_principal()
     op_pric = input("##### Escolha sua opção: ")
     return op_pric
-    
 
 ###############################################  
 #####          Módulo Clientes            #####  
 ############################################### 
 def modCliente():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("#############################################")
-    print("#####    Você está no Módulo Clientes   #####")
-    print("#############################################")
-    print("##### 1 - Cadastrar Cliente             #####")
-    print("##### 2 - Exibir Dados do Cliente       #####")
-    print("##### 3 - Alterar Dados do Cliente      #####")
-    print("##### 4 - Excluir Cliente               #####")
-    print("##### 0 - Retornar ao Menu Principal    #####")
+    interface_clientes()
     op_cliente = input("##### Escolha sua opção: ") 
     return op_cliente
 
@@ -73,6 +68,7 @@ def cadastrarCliente():
     nome = input("##### Nome: ")
     print()
     cpf = input("##### CPF: ")
+    
     print()
     email = input("##### Email: ")
     print()
@@ -164,16 +160,7 @@ def excluirCliente():
 #####          Módulo Funcionários        #####        
 ###############################################    
 def modFunc():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("#############################################")
-    print("##### Você está no Módulo Funcionários  #####")
-    print("#############################################")
-    print("##### 1 - Cadastrar Funcionários        #####")
-    print("##### 2 - Exibir Dados do Funcionários  #####")
-    print("##### 3 - Alterar Dados do Funcionários #####")
-    print("##### 4 - Excluir Funcionário           #####")
-    print("##### 0 - Retornar ao Menu Principal    #####")
+    interface_funcionarios()
     op_func = input("##### Escolha sua opção: ")
     return op_func
 
@@ -278,16 +265,7 @@ def excluirFunc():
 #####         Módulo Veículos         #####         
 ###########################################
 def modVeic():
-    os.system('clear' if os.name == 'posix' else 'cls')   
-    print()
-    print("############################################")
-    print("#####         Módulo Veículos          #####")
-    print("############################################")
-    print("##### 1 - Cadastrar Veículo            #####")
-    print("##### 2 - Exibir Dados do Veículo      #####")
-    print("##### 3 - Alterar Dados do Veículo     #####")
-    print("##### 4 - Excluir Veículo              #####")
-    print("##### 0 - Retornar ao Menu Principal   #####")
+    interface_veiculos()
     op_veic = input("##### Escolha sua opção: ")
     return op_veic
 
@@ -410,17 +388,7 @@ def excluirVeic():
 #####          Módulo Reserva          #####        
 ############################################
 def modReserva():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("#############################################")
-    print("#####   Você está no Módulo Reserva     #####")
-    print("#############################################")
-    print("##### 1 - Reservar Veículo              #####")
-    print("##### 2 - Devolver Veículo              #####")
-    print("##### 3 - Veículos Disponíveis          #####")
-    print("##### 4 - Veículos Alugados             #####")
-    print("##### 5 - Política de Combustível       #####")
-    print("##### 0 - Retornar ao Menu Principal    #####")
+    interface_reserva()
     op_reserva = input("##### Escolha sua opção: ")
     return op_reserva
 
@@ -486,14 +454,7 @@ def devolverVeiculo():
 
 
 def veiculosDisponiveis():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("########################################################################################################################################################")
-    print("#####                                                      Lista de Veículos Disponíveis                                                           #####")
-    print("########################################################################################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|--------------------|------------------|")
-    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       | Categoria |  Data do Cadastro  |      Horário     |")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|--------------------|------------------|")
+    interface_Veiculosdisponiveis()
     for placa, dados in veiculos.items():
         if not dados ['alugado']:
             print("| %-9s "%placa, end='')
@@ -509,14 +470,7 @@ def veiculosDisponiveis():
     input("Tecle <ENTER> para continuar...")
 
 def veiculosAlugados():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("##################################################################################################################################################################################################")
-    print("#######################                                                             Lista de Veículos Alugados                                                             #######################")
-    print("##################################################################################################################################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|---------------------|----------------------|-------------------------------------|")
-    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       | Categoria |   Data do Aluguel   |  Data de Devolução   |            Alugado por:             |")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|---------------------|----------------------|-------------------------------------|")
+    interface_Veiculosalugados()
     for placa, dados in veiculos.items():
         if dados['alugado']:
             print("| %-9s "%placa, end='')
@@ -538,66 +492,34 @@ def veiculosAlugados():
 
 
 def politicaCombustivel():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("####################################################################################")
-    print("#####                         Política de Combustível                          #####")
-    print("####################################################################################")
-    print("""
-        Prezado Cliente,
-
-        Gostaríamos de informar que, de acordo com nossas políticas de 
-        aluguel de carros, é obrigatório que os veículos alugados sejam
-        devolvidos com o tanque de combustível cheio. Este procedimento 
-        é essencial para garantir a melhor experiência de locação para
-        todos os nossos clientes.
-
-        Agradecemos antecipadamente pela sua cooperação e compreensão.
-        Se você tiver alguma dúvida ou precisar de assistência adicional,
-        não hesite em entrar em contato conosco. Estamos aqui para ajudar!
-        
-        Atenciosamente,
-        [João Roberto Galvão Aquino]
-        [Locadora de Carros - Crystal]""")
-    print()
+    interface_Politicacombustivel()
     input("\nTecle <ENTER> para continuar...")
-
 
 #############################################
 #####         Módulo Relatório          #####   
 #############################################
 def modRelatorio():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("#############################################")
-    print("#####   Você está no Módulo Relatório   #####")
-    print("#############################################")
-    print("##### 1 - Lista Geral de Clientes       #####")
-    print("##### 2 - Lista Geral de Funcionários   #####")
-    print("##### 3 - Lista Geral de Veículos       #####")
-    print("##### 4 - Veículos mais Procurados      #####")
-    print("##### 5 - Histórico de Alugueis         #####")
-    print("##### 0 - Retornar ao Menu Principal    #####")
+    interface_relatorio()
     op_relatorio = input("##### Escolha sua opção: ")
     return op_relatorio 
 
 def lista_geral_clientes():
     os.system('clear' if os.name == 'posix' else 'cls')
     print()
-    print("##########################################################################################################################################################")
-    print("#######################                                          Lista Geral de Clientes                                           #######################")
-    print("##########################################################################################################################################################")
+    print("##############################################################################################################################################################")
+    print("#######################                                            Lista Geral de Clientes                                             #######################")
+    print("##############################################################################################################################################################")
     print("|-----------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
     print("|       CPF       |            Nome Completo            |               E-mail               |     Celular     |  Data de Nascimento  |   Data do Cadastro   |")
     print("|-----------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
     for cpf in clientes:
-        print("| %-10s "%(cpf), end='')
+        print("| %-15s "%(cpf), end='')
         print("| %-35s "%(clientes[cpf][0]), end='')
         print("| %-34s "%(clientes[cpf][1]), end='')
         print("| %-15s "%(clientes[cpf][2]), end='')
         print("| %-20s "%(clientes[cpf][3]), end='')
         print("| %-20s |"%(clientes[cpf][4]))
-    print("|----------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
+    print("|-----------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
     input("Tecle <ENTER> para continuar...")
 
 def lista_geral_funcionarios():
@@ -624,7 +546,7 @@ def lista_geral_veiculos():
     os.system('clear' if os.name == 'posix' else 'cls')
     print()
     print("###############################################################################################################################################")
-    print("#######################                                     Lista Geral de Veículos                                      #######################")
+    print("#######################                                    Lista Geral de Veículos                                      #######################")
     print("###############################################################################################################################################")
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|------------------|-----------|")
     print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       | Categoria | Data do Cadastro |  Horário  |")
@@ -652,57 +574,36 @@ def veiculos_mais_procurados():
     print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |")
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
     #tranformar em comentário ctrl + /
-    lista_placas = alugueis_por_veiculo.keys()
-    lista_alugueis = alugueis_por_veiculo.values()
-    tam = len(lista_placas)
-    for i in range(tam-1):
-        for j in range(i+1,tam):
-            if lista_alugueis[i]<lista_alugueis[j]:
-                variavelTemp = lista_alugueis[i]
-                lista_alugueis[i] = lista_alugueis[j]
-                lista_alugueis[j] = variavelTemp
+    # lista_placas = alugueis_por_veiculo.keys()
+    # lista_alugueis = alugueis_por_veiculo.values()
+    # tam = len(lista_placas)
+    # for i in range(tam-1):
+    #     for j in range(i+1,tam):
+    #         if lista_alugueis[i]<lista_alugueis[j]:
+    #             variavelTemp = lista_alugueis[i]
+    #             lista_alugueis[i] = lista_alugueis[j]
+    #             lista_alugueis[j] = variavelTemp
                 
-                variavelTemp = lista_placas[i]
-                lista_placas[i] = lista_placas[j]
-                lista_placas[j] = variavelTemp
+    #             variavelTemp = lista_placas[i]
+    #             lista_placas[i] = lista_placas[j]
+    #             lista_placas[j] = variavelTemp
 
-    print(lista_placas, end='')
-    print(lista_alugueis)
+    # print(lista_placas, end='')
+    # print(lista_alugueis)
 
     print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
 def historicoAlugueis():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("#############################################")
-    print("#####   Histórico de Aluguel do Veículo #####")
-    print("#############################################")
-    print()
+    interface_historico()
     # placa = input("Informe a placa do veículo: ").upper()
     # aluguel = historicoAlugueis[placa]
-    
-
-#     input("Tecle <ENTER> para continuar...")
+    input("Tecle <ENTER> para continuar...")
 
 ##############################################
 #####         Módulo Informações         #####    
 ##############################################
 def modInfo():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("###################################################")
-    print("#####     Você está no Módulo Informações     #####")
-    print("###################################################")
-    print("#####                                         #####")
-    print("#####  Projeto: Locadora de Veículos Crystal  #####")
-    print("#####  Desenvolvimento:                       #####")
-    print("#####  João Roberto Galvão Aquino             #####")
-    print("#####                                         #####")
-    print("#####  E-mail para comunicação:               #####")
-    print("#####  joao.roberto.galvao.017@gmail.com      #####")
-    print("#####                                         #####")
-    print("###################################################")
-    print()
+    interface_informacoes()
     input("Tecle <ENTER> para voltar ao menu principal...")
