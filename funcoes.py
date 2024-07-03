@@ -2,19 +2,7 @@ import os
 import pickle
 from datetime import datetime, timedelta
 from dicionarios import clientes, funcionarios, veiculos, alugueis_por_veiculo, valor_aluguel, historico_aluguel
-from interface import(
-    interface_principal,
-    interface_clientes,
-    interface_funcionarios,
-    interface_veiculos,
-    interface_reserva,
-    interface_relatorio,
-    interface_historico,
-    interface_informacoes,
-    interface_Veiculosalugados,
-    interface_Veiculosdisponiveis,
-    interface_Politicacombustivel
-)
+import interfaces as ifc 
 
 
 
@@ -46,7 +34,7 @@ def escreverArquivos():
 #####                Menu Pricipal                 #####
 ########################################################
 def menuPrincipal():
-    interface_principal()
+    ifc.interface_principal()
     op_pric = input("##### Escolha sua opção: ")
     return op_pric
 
@@ -54,7 +42,7 @@ def menuPrincipal():
 #####          Módulo Clientes            #####  
 ############################################### 
 def modCliente():
-    interface_clientes()
+    ifc.interface_clientes()
     op_cliente = input("##### Escolha sua opção: ") 
     return op_cliente
 
@@ -160,7 +148,7 @@ def excluirCliente():
 #####          Módulo Funcionários        #####        
 ###############################################    
 def modFunc():
-    interface_funcionarios()
+    ifc.interface_funcionarios()
     op_func = input("##### Escolha sua opção: ")
     return op_func
 
@@ -265,7 +253,7 @@ def excluirFunc():
 #####         Módulo Veículos         #####         
 ###########################################
 def modVeic():
-    interface_veiculos()
+    ifc.interface_veiculos()
     op_veic = input("##### Escolha sua opção: ")
     return op_veic
 
@@ -388,7 +376,7 @@ def excluirVeic():
 #####          Módulo Reserva          #####        
 ############################################
 def modReserva():
-    interface_reserva()
+    ifc.interface_reserva()
     op_reserva = input("##### Escolha sua opção: ")
     return op_reserva
 
@@ -454,7 +442,7 @@ def devolverVeiculo():
 
 
 def veiculosDisponiveis():
-    interface_Veiculosdisponiveis()
+    ifc.interface_Veiculosdisponiveis()
     for placa, dados in veiculos.items():
         if not dados ['alugado']:
             print("| %-9s "%placa, end='')
@@ -470,7 +458,7 @@ def veiculosDisponiveis():
     input("Tecle <ENTER> para continuar...")
 
 def veiculosAlugados():
-    interface_Veiculosalugados()
+    ifc.interface_Veiculosalugados()
     for placa, dados in veiculos.items():
         if dados['alugado']:
             print("| %-9s "%placa, end='')
@@ -492,14 +480,14 @@ def veiculosAlugados():
 
 
 def politicaCombustivel():
-    interface_Politicacombustivel()
+    ifc.interface_Politicacombustivel()
     input("\nTecle <ENTER> para continuar...")
 
 #############################################
 #####         Módulo Relatório          #####   
 #############################################
 def modRelatorio():
-    interface_relatorio()
+    ifc.interface_relatorio()
     op_relatorio = input("##### Escolha sua opção: ")
     return op_relatorio 
 
@@ -596,7 +584,7 @@ def veiculos_mais_procurados():
     input("Tecle <ENTER> para continuar...")
 
 def historicoAlugueis():
-    interface_historico()
+    ifc.interface_historico()
     # placa = input("Informe a placa do veículo: ").upper()
     # aluguel = historicoAlugueis[placa]
     input("Tecle <ENTER> para continuar...")
@@ -605,5 +593,6 @@ def historicoAlugueis():
 #####         Módulo Informações         #####    
 ##############################################
 def modInfo():
-    interface_informacoes()
+    ifc.interface_informacoes()
+
     input("Tecle <ENTER> para voltar ao menu principal...")
