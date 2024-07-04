@@ -3,7 +3,7 @@ import pickle
 from datetime import datetime, timedelta
 from dicionarios import clientes, funcionarios, veiculos, alugueis_por_veiculo, valor_aluguel, historico_aluguel
 import interfaces as ifc 
-
+import validacao as val
 
 
 ########################################################
@@ -51,12 +51,14 @@ def cadastrarCliente():
     nome = input("##### Nome: ")
     print()
     cpf = input("##### CPF: ")
+    cpf = val.formatar_cpf(cpf)
     print()
     email = input("##### Email: ")
     print()
     fone = input("##### Celular: ")
     print()
     dataNascimento = input("##### Data de nascimento (00/00/0000): ")
+    dataNascimento = val.formatar_data(dataNascimento)
     print()
     data = datetime.now()
     clientes[cpf] = [nome,email,fone,dataNascimento, data.strftime("%x, %X")]
@@ -66,6 +68,7 @@ def cadastrarCliente():
 def exibirDadosCliente():
     ifc.cabecalhoModulos("Exibir Dados do Cliente")
     cpf = input('Qual o CPF do cliente? ')
+    cpf = val.formatar_cpf(cpf)
     if cpf in clientes:
         print("##### Nome: ", clientes[cpf][0])
         print("##### CPF: ", cpf)
@@ -80,6 +83,7 @@ def exibirDadosCliente():
 def alterarDadosCliente():
     ifc.cabecalhoModulos("Alterar Dados do Cliente")
     cpf = input('Qual o CPF do Cliente? ')
+    cpf = val.formatar_cpf(cpf)
     if cpf in clientes:
         dadosCliente = clientes[cpf]
         print("Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
@@ -106,6 +110,7 @@ def alterarDadosCliente():
 def excluirCliente():
     ifc.cabecalhoModulos("Excluir Cliente")
     cpf = input('Informe o CPF do cliente: ')
+    cpf = val.formatar_cpf(cpf)
     if cpf in clientes:
         print("##### Nome: ", clientes[cpf][0])
         print("##### Email: ", clientes[cpf][1])
@@ -136,12 +141,14 @@ def cadastrarFunc():
     nome = input("##### Nome: ")
     print()
     cpf = input("##### CPF: ")
+    cpf = val.formatar_cpf(cpf)
     print()
     email = input("##### Email: ")
     print()
     fone = input("##### Celular: ")
     print()
     dataNascimento = input("##### Data de Nascimento (00/00/0000): ")
+    dataNascimento = val.formatar_data(dataNascimento)
     print()
     data = datetime.now()
     funcionarios[cpf] = [nome,email,fone,dataNascimento,data.strftime("%x, %X")]
@@ -151,6 +158,7 @@ def cadastrarFunc():
 def exibirDadosFunc():
     ifc.cabecalhoModulos("Exibir Dados do Funcionário")
     cpf = input('Qual o CPF do funcionário(a)? ')
+    cpf = val.formatar_cpf(cpf)
     if cpf in funcionarios:
         print("##### Nome: ", funcionarios[cpf][0])
         print("##### CPF: ", cpf)
@@ -165,6 +173,7 @@ def exibirDadosFunc():
 def alterarDadosFunc():
     ifc.cabecalhoModulos("Alterar Dados do Funcionário")
     cpf = input('Qual o CPF do funcionário(a)? ')
+    cpf = val.formatar_cpf(cpf)
     if cpf in funcionarios:
         dadosFuncionarios = funcionarios[cpf]
         print("Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
@@ -191,6 +200,7 @@ def alterarDadosFunc():
 def excluirFunc():
     ifc.cabecalhoModulos("Excluir Funcionário")
     cpf = input('Informe o CPF do funcionário(a): ')
+    cpf = val.formatar_cpf(cpf)
     if cpf in funcionarios:
         print("##### Nome: ", funcionarios[cpf][0])
         print("##### Email: ", funcionarios[cpf][1])
@@ -430,13 +440,13 @@ def lista_geral_clientes():
 def lista_geral_funcionarios():
     ifc.interface_listfucionarios()
     for cpf in funcionarios:
-        print("| %-9s "%(cpf), end='')
+        print("| %-15s "%(cpf), end='')
         print("| %-35s "%(funcionarios[cpf][0]), end='')
         print("| %-34s "%(funcionarios[cpf][1]), end='')
         print("| %-15s "%(funcionarios[cpf][2]), end='')
         print("| %-20s "%(funcionarios[cpf][3]), end='')
         print("| %-20s |"%(funcionarios[cpf][4]))
-    print("|-------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
+    print("|-----------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
