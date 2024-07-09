@@ -15,3 +15,4 @@ def formatar_telefone(telefone):
     telefone = telefone.replace("(", "").replace(")", "").replace(" ", "").replace("-", "")
     # Adiciona a formatação
     return f"({telefone[:2]}) {telefone[2:7]}-{telefone[7:]}"
+

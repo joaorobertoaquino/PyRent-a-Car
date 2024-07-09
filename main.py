@@ -1,121 +1,90 @@
-from funcoes import (
-    alterarDadosFunc,
-    cadastrarFunc,
-    cadastrarVeic,
-    excluirVeic,
-    excluirFunc,
-    exibirDadosFunc,
-    exibirDadosVeic,
-    menuPrincipal,
-    modCliente,
-    cadastrarCliente,
-    excluirCliente,
-    modFunc,
-    modInfo,
-    modRelatorio,
-    modReserva,
-    modVeic,
-    alterarDadosVeic,
-    alterarDadosCliente,
-    exibirDadosCliente,
-    escreverArquivos,
-    lista_geral_clientes,
-    lista_geral_funcionarios,
-    lista_geral_veiculos,
-    veiculos_mais_procurados,
-    reservarVeiculo,
-    veiculosDisponiveis,
-    politicaCombustivel,
-    veiculosAlugados,
-    devolverVeiculo,
-    historicoAlugueis
-)
+import funcoes
 
 ###################################################
 ##### Projeto - Locadora de Carros - Crystal  #####
 ###################################################
 op_pric = ''
 while op_pric != '0':
-  op_pric = menuPrincipal()
+  op_pric = funcoes.menuPrincipal()
   
   if op_pric == '1':
     op_cliente = ''
     while op_cliente != '0':
-      op_cliente = modCliente()
+      op_cliente = funcoes.modCliente()
       
       if op_cliente == '1':
-        cadastrarCliente()
+        funcoes.cadastrarCliente()
       elif op_cliente == '2':
-        exibirDadosCliente()
+        funcoes.exibirDadosCliente()
       elif op_cliente == '3':
-        alterarDadosCliente() 
+        funcoes.alterarDadosCliente() 
       elif op_cliente == '4':
-        excluirCliente()
+        funcoes.excluirCliente()
   
   elif op_pric == '2':
     op_func = ''
     while op_func != '0':
-      op_func = modFunc()
+      op_func = funcoes.modFunc()
       
       if op_func == '1':
-        cadastrarFunc()
+        funcoes.cadastrarFunc()
       elif op_func == '2':
-        exibirDadosFunc()
+        funcoes.exibirDadosFunc()
       elif op_func == '3':
-        alterarDadosFunc()
+        funcoes.alterarDadosFunc()
       elif op_func == '4':
-        excluirFunc()
+        funcoes.excluirFunc()
 
   elif op_pric == '3':
     op_veic = ''
     while op_veic != '0':
-      op_veic = modVeic()
+      op_veic = funcoes.modVeic()
 
       if op_veic == '1':
-        cadastrarVeic()
+        funcoes.cadastrarVeic()
       elif op_veic == '2':
-        exibirDadosVeic()
+        funcoes.exibirDadosVeic()
       elif op_veic == '3':
-        alterarDadosVeic()
+        funcoes.alterarDadosVeic()
       elif op_veic == '4':
-        excluirVeic()
+        funcoes.excluirVeic()
 
   elif op_pric == '4':
     op_reserva = ''
     while op_reserva != '0':
-      op_reserva = modReserva()
+      op_reserva = funcoes.modReserva()
       
       if op_reserva == '1':
-        reservarVeiculo()
+        funcoes.reservarVeiculo()
       elif op_reserva == '2':
-        devolverVeiculo()
+        funcoes.devolverVeiculo()
       elif op_reserva == '3':
-        veiculosDisponiveis()
+        funcoes.veiculosDisponiveis()
       elif op_reserva == '4':
-        veiculosAlugados()
+        funcoes.veiculosAlugados()
       elif op_reserva == '5':
-        politicaCombustivel()
+        funcoes.politicaCombustivel()
 
   elif op_pric == '5':
     op_relatorio = ''
     while op_relatorio != '0':
-      op_relatorio = modRelatorio()
+      op_relatorio = funcoes.modRelatorio()
 
       if op_relatorio == '1':
-        lista_geral_clientes()
+        funcoes.lista_geral_clientes()
       elif op_relatorio == '2':
-        lista_geral_funcionarios()
+        funcoes.lista_geral_funcionarios()
       elif op_relatorio == '3':
-        lista_geral_veiculos()
+        funcoes.lista_geral_veiculos()
       elif op_relatorio == '4':
-        veiculos_mais_procurados()
+        funcoes.veiculos_mais_procurados()
       elif op_relatorio == '5':
-        historicoAlugueis()
+        funcoes.historicoAlugueis()
 
   elif op_pric == '6':
-    op_pric = modInfo()
+    op_pric = funcoes.modInfo()
 
 print("Você encerrou o programa!")
 print("Até logo!")
-escreverArquivos()
+funcoes.escreverArquivos()
 

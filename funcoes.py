@@ -163,8 +163,9 @@ def exibirDadosFunc():
     ifc.cabecalhoModulos("Exibir Dados do Funcionário")
     cpf = input('⮕ Qual o CPF do funcionário(a)? ')
     cpf = val.formatar_cpf(cpf)
+    print()
     if cpf in funcionarios:
-        print("\n👤 Nome: ", funcionarios[cpf][0])
+        print("👤 Nome: ", funcionarios[cpf][0])
         print("🆔 CPF: ", cpf)
         print("📧 Email: ", funcionarios[cpf][1])
         print("📞 Celular: ", funcionarios[cpf][2])
@@ -262,6 +263,7 @@ def cadastrarVeic():
 def exibirDadosVeic():
     ifc.cabecalhoModulos("Exibir Dados do Veículo")
     placa = input("⮕ Digite a placa do veículo: ").upper()
+    print()
     if placa in veiculos:
         dados = veiculos[placa]
         print(f"##### Marca: {dados['marca']}")
