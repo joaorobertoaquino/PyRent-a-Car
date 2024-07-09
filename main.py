@@ -118,3 +118,4 @@ while op_pric != '0':
 print("Você encerrou o programa!")
 print("Até logo!")
 escreverArquivos()
+

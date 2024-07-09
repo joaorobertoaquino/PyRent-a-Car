@@ -9,3 +9,9 @@ def formatar_data(data):
     data = data.replace("/", "")
     # Adiciona a formatação
     return f"{data[:2]}/{data[2:4]}/{data[4:]}"
+
+def formatar_telefone(telefone):
+    # Remove caracteres não numéricos
+    telefone = telefone.replace("(", "").replace(")", "").replace(" ", "").replace("-", "")
+    # Adiciona a formatação
+    return f"({telefone[:2]}) {telefone[2:7]}-{telefone[7:]}"

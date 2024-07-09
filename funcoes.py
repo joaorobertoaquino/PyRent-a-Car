@@ -56,6 +56,7 @@ def cadastrarCliente():
     email = input("📧 Email: ")
     print()
     fone = input("📞 Celular: ")
+    fone = val.formatar_telefone(fone)
     print()
     dataNascimento = input("🎂 Data de nascimento (00/00/0000): ")
     dataNascimento = val.formatar_data(dataNascimento)
@@ -87,8 +88,8 @@ def alterarDadosCliente():
     cpf = val.formatar_cpf(cpf)
     if cpf in clientes:
         dadosCliente = clientes[cpf]
-        print("⮕ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
-        nome = input(f"👤 Nome ({dadosCliente[0]}): ").strip()
+        print("\n⮕ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
+        nome = input(f"\n👤 Nome ({dadosCliente[0]}): ").strip()
         email = input(f"📧 Email ({dadosCliente[1]}): ").strip()
         fone = input(f"📞 Celular ({dadosCliente[2]}): ").strip()
         dataNascimento = input(f"🎂 Data de Nascimento ({dadosCliente[3]}): ").strip()
@@ -98,8 +99,10 @@ def alterarDadosCliente():
         if email:
             clientes[cpf][1] = email
         if fone:
+            fone = val.formatar_telefone(fone)
             clientes[cpf][2] = fone
         if dataNascimento:
+            dataNascimento = val.formatar_data(dataNascimento)
             clientes[cpf][3] = dataNascimento
 
         print('\n📋 Dados alterados com sucesso!')
@@ -161,7 +164,7 @@ def exibirDadosFunc():
     cpf = input('⮕ Qual o CPF do funcionário(a)? ')
     cpf = val.formatar_cpf(cpf)
     if cpf in funcionarios:
-        print("👤 Nome: ", funcionarios[cpf][0])
+        print("\n👤 Nome: ", funcionarios[cpf][0])
         print("🆔 CPF: ", cpf)
         print("📧 Email: ", funcionarios[cpf][1])
         print("📞 Celular: ", funcionarios[cpf][2])
@@ -512,3 +515,4 @@ def modInfo():
     ifc.interface_informacoes()
 
     input("Tecle <ENTER> para voltar ao menu principal...")
+
