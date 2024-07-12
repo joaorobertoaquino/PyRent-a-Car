@@ -1,8 +1,8 @@
 import funcoes
 
-###################################################
-##### Projeto - Locadora de Carros - Crystal  #####
-###################################################
+##########################################
+#####  Locadora de Carros - Crystal  #####
+##########################################
 op_pric = ''
 while op_pric != '0':
   op_pric = funcoes.menuPrincipal()

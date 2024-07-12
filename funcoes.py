@@ -515,16 +515,25 @@ def veiculos_mais_procurados():
     input("Tecle <ENTER> para continuar...")
 
 def historicoAlugueis():
-    ifc.interface_historico()
+    os.system('clear' if os.name == 'posix' else 'cls')
+    print()
     placa = input("❱ Informe a placa do veículo para ver o histórico: ").upper()
-    
     if placa in historico_aluguel:
-        print(f"\n❱ Histórico de aluguéis para o veículo {placa}:")
-        for aluguel in sorted(historico_aluguel[placa], key=lambda x: datetime.strptime(x['data_inicio'], "%d/%m/%Y")):
-            print(f"\nCliente: {aluguel['nome_cliente']}, CPF: {aluguel['cpf_cliente']}, Início: {aluguel['data_inicio']} {aluguel['hora_inicio']}, Fim: {aluguel['data_fim']} {aluguel['hora_fim']}, Status: {'Ativo' if aluguel['status'] else 'Devolvido'}")
+        ifc.interface_historico()
+        for aluguel in sorted(historico_aluguel[placa], key=lambda x: datetime.strptime(x['data_inicio'], "%d/%m/%Y")):   
+            status = 'Ativo' if aluguel['status'] else 'Devolvido'
+            print("| %-7s "%placa, end='')
+            print("| %-35s "%aluguel['nome_cliente'], end='')
+            print("| %-13s "%aluguel['cpf_cliente'], end='')
+            print("| %-12s "%aluguel['data_inicio'], end='')
+            print("| %-12s "%aluguel['hora_inicio'], end='')
+            print("| %-10s "%aluguel['data_fim'], end='')
+            print("| %-14s "%aluguel['hora_fim'], end='')
+            print("| %-10s |"%status)
+            
     else:
         print("🚫 Não há histórico de aluguéis para este veículo.")
-        
+    print("|---------|-------------------------------------|---------------|--------------|--------------|------------|----------------|------------|")
     input("\nTecle <ENTER> para continuar...")
 
 ##############################################
@@ -532,6 +541,5 @@ def historicoAlugueis():
 ##############################################
 def modInfo():
     ifc.interface_informacoes()
-
     input("Tecle <ENTER> para voltar ao menu principal...")
 
