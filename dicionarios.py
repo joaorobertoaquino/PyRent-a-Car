@@ -23,12 +23,17 @@ veiculos = {
 }
 
 historico_aluguel = {
-    "ABC1234": {
-        'cpf_cliente': '123.456.789-00',
-        'nome_cliente': 'João Roberto Galvão Aquino',
-        'data_fim': '06/12/2024',
-        'status': True  
-    }
+    "BEE5T23": [
+        {
+          'cpf_cliente': '123.456.789-00',
+          'nome_cliente': 'João Roberto Galvão Aquino',
+          'data_inicio': '06/10/2024',
+          'hora_inicio': '08:00:00',
+          'data_fim': '06/12/2024',
+          'hora_fim': '12:00:00',
+          'status': False  
+        }
+    ]
 }
 
 alugueis_por_veiculo = {

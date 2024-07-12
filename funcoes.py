@@ -35,7 +35,7 @@ def escreverArquivos():
 ########################################################
 def menuPrincipal():
     ifc.interface_principal()
-    op_pric = input("##### Escolha sua opção: ")
+    op_pric = input("=====❱ Escolha sua opção: ")
     return op_pric
 
 ###############################################  
@@ -43,7 +43,7 @@ def menuPrincipal():
 ############################################### 
 def modCliente():
     ifc.interface_clientes()
-    op_cliente = input("##### Escolha sua opção: ") 
+    op_cliente = input("=====❱ Escolha sua opção: ") 
     return op_cliente
 
 def cadastrarCliente():
@@ -68,7 +68,7 @@ def cadastrarCliente():
 
 def exibirDadosCliente():
     ifc.cabecalhoModulos("Exibir Dados do Cliente")
-    cpf = input('⮕ Qual o CPF do cliente? ')
+    cpf = input('❱ Qual o CPF do cliente? ')
     cpf = val.formatar_cpf(cpf)
     print()
     if cpf in clientes:
@@ -80,15 +80,15 @@ def exibirDadosCliente():
     else:
         print('❌ Cliente inexistente!')
     print()
-    input(" Tecle <ENTER> para continuar...")
+    input("Tecle <ENTER> para continuar...")
 
 def alterarDadosCliente():
     ifc.cabecalhoModulos("Alterar Dados do Cliente")
-    cpf = input('⮕ Qual o CPF do Cliente? ')
+    cpf = input('❱ Qual o CPF do Cliente? ')
     cpf = val.formatar_cpf(cpf)
     if cpf in clientes:
         dadosCliente = clientes[cpf]
-        print("\n⮕ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
+        print("\n❱ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
         nome = input(f"\n👤 Nome ({dadosCliente[0]}): ").strip()
         email = input(f"📧 Email ({dadosCliente[1]}): ").strip()
         fone = input(f"📞 Celular ({dadosCliente[2]}): ").strip()
@@ -113,7 +113,7 @@ def alterarDadosCliente():
 
 def excluirCliente():
     ifc.cabecalhoModulos("Excluir Cliente")
-    cpf = input('⮕ Informe o CPF do cliente: ')
+    cpf = input('_ Informe o CPF do cliente: ')
     cpf = val.formatar_cpf(cpf)
     if cpf in clientes:
         print("👤 Nome: ", clientes[cpf][0])
@@ -121,7 +121,7 @@ def excluirCliente():
         print("📞 Celular: ", clientes[cpf][2])
         print("🎂 Data de Nascimento: ", clientes[cpf][3])
         print()
-        resp = input('⮕ Tem certeza que deseja excluir este cliente (Sim/Não)?')
+        resp = input('❱ Tem certeza que deseja excluir este cliente (Sim/Não)?')
         if resp.upper() == 'SIM':
             del clientes[cpf]
             print("✅ Aluno excluído com sucesso!")
@@ -137,7 +137,7 @@ def excluirCliente():
 ###############################################    
 def modFunc():
     ifc.interface_funcionarios()
-    op_func = input("##### Escolha sua opção: ")
+    op_func = input("=====❱ Escolha sua opção: ")
     return op_func
 
 def cadastrarFunc():
@@ -161,7 +161,7 @@ def cadastrarFunc():
 
 def exibirDadosFunc():
     ifc.cabecalhoModulos("Exibir Dados do Funcionário")
-    cpf = input('⮕ Qual o CPF do funcionário(a)? ')
+    cpf = input('❱ Qual o CPF do funcionário(a)? ')
     cpf = val.formatar_cpf(cpf)
     print()
     if cpf in funcionarios:
@@ -177,11 +177,11 @@ def exibirDadosFunc():
 
 def alterarDadosFunc():
     ifc.cabecalhoModulos("Alterar Dados do Funcionário")
-    cpf = input('⮕ Qual o CPF do funcionário(a)? ')
+    cpf = input('❱ Qual o CPF do funcionário(a)? ')
     cpf = val.formatar_cpf(cpf)
     if cpf in funcionarios:
         dadosFuncionarios = funcionarios[cpf]
-        print("⮕ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
+        print("❱ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
         nome = input(f"👤 Nome ({dadosFuncionarios[0]}: )").strip()
         email = input(f"📧 Email ({dadosFuncionarios[1]}): ").strip()
         fone = input(f"📞 Celular ({dadosFuncionarios[2]}): ").strip()
@@ -204,7 +204,7 @@ def alterarDadosFunc():
 
 def excluirFunc():
     ifc.cabecalhoModulos("Excluir Funcionário")
-    cpf = input('⮕ Informe o CPF do funcionário(a): ')
+    cpf = input('❱ Informe o CPF do funcionário(a): ')
     cpf = val.formatar_cpf(cpf)
     if cpf in funcionarios:
         print("👤 Nome: ", funcionarios[cpf][0])
@@ -212,7 +212,7 @@ def excluirFunc():
         print("📞 Celular: ", funcionarios[cpf][2])
         print("🎂 Data de Nascimento: ", funcionarios[cpf][3])
         print()
-        resp = input('⮕ Tem certeza que deseja excluir este funcionário(a)? (Sim/Não)').upper()
+        resp = input('❱ Tem certeza que deseja excluir este funcionário(a)? (Sim/Não)').upper()
         if resp == 'SIM':
             del funcionarios[cpf]
             print("✅ Funcionário(a) excluído com sucesso!")
@@ -228,22 +228,22 @@ def excluirFunc():
 ###########################################
 def modVeic():
     ifc.interface_veiculos()
-    op_veic = input("##### Escolha sua opção: ")
+    op_veic = input("=====❱ Escolha sua opção: ")
     return op_veic
 
 def cadastrarVeic():
     ifc.cabecalhoModulos("Cadastrar Veículo")
-    marca = input("##### Marca: ")
+    marca = input("⊳ Marca: ")
     print()
-    modelo = input("##### Modelo: ")
+    modelo = input("⊳ Modelo: ")
     print()
-    ano = input("##### Ano de lançamento: ")
+    ano = input("⊳ Ano de lançamento: ")
     print()
-    cor = input("##### Cor: ")
+    cor = input("⊳ Cor: ")
     print()
-    placa = input("##### Número da placa: ").upper()
+    placa = input("⊳ Número da placa: ").upper()
     print()
-    categoria = input("##### Informe a categoria do carro: ")
+    categoria = input("⊳ Informe a categoria do carro: ")
     print()
     data = datetime.now()
     veiculos[placa] = {
@@ -262,39 +262,38 @@ def cadastrarVeic():
 
 def exibirDadosVeic():
     ifc.cabecalhoModulos("Exibir Dados do Veículo")
-    placa = input("⮕ Digite a placa do veículo: ").upper()
+    placa = input("❱ Digite a placa do veículo: ").upper()
     print()
     if placa in veiculos:
         dados = veiculos[placa]
-        print(f"##### Marca: {dados['marca']}")
-        print(f"##### Modelo: {dados['modelo']}")
-        print(f"##### Ano: {dados['ano']}")
-        print(f"##### Cor: {dados['cor']}")
-        print(f"##### Categoria: {dados['categoria']}")
-        print(f"##### Cadastro: {dados['data_cadastro']} às {dados['hora_cadastro']}")
-        print(f"##### Alugado: {'Sim' if dados['alugado'] else 'Não'}")
+        print(f"⊳ Marca: {dados['marca']}")
+        print(f"⊳ Modelo: {dados['modelo']}")
+        print(f"⊳ Ano: {dados['ano']}")
+        print(f"⊳ Cor: {dados['cor']}")
+        print(f"⊳ Categoria: {dados['categoria']}")
+        print(f"⊳ Cadastro: {dados['data_cadastro']} às {dados['hora_cadastro']}")
+        print(f"⊳ Alugado: {'Sim' if dados['alugado'] else 'Não'}")
         if dados['alugado']:
-            print(f"##### Data de Início: {dados['data_inicio']}")
-            print(f"##### Data de Fim: {dados['data_fim']}")
+            print(f"⊳ Data de Início: {dados['data_inicio']}")
+            print(f"⊳ Data de Fim: {dados['data_fim']}")
     else:
         print("❌ Veículo não encontrado.")
     input("\nPressione Enter para voltar ao menu...")
 
 
-
 def alterarDadosVeic():
     ifc.cabecalhoModulos("Alterar Dados do Veículo")
-    placa = input('⮕ Informe a placa do veículo: ').upper()
-    respExcluirDados = input("Deseja mesmo continuar com essa ação (Sim / Não)? ")
+    placa = input('❱ Informe a placa do veículo: ').upper()
+    respExcluirDados = input("⊳ Deseja mesmo continuar com essa ação (Sim / Não)? ")
     if respExcluirDados.upper() == 'SIM':
         if placa in veiculos:
             veiculo = veiculos[placa]
-            print("Deixe o campo em branco para não alterar a informação.")
-            marca = input(f"Marca ({veiculo['marca']}): ") or veiculo['marca']
-            modelo = input(f"Modelo ({veiculo['modelo']}): ") or veiculo['modelo']
-            ano = input(f"Ano ({veiculo['ano']}): ") or veiculo['ano']
-            cor = input(f"Cor ({veiculo['cor']}): ") or veiculo['cor']
-            categoria = input(f"Categoria ({veiculo['categoria']}): ") or veiculo['categoria']
+            print("\n❱ Deixe o campo em branco para não alterar a informação.")
+            marca = input(f"⊳ Marca ({veiculo['marca']}): ") or veiculo['marca']
+            modelo = input(f"⊳ Modelo ({veiculo['modelo']}): ") or veiculo['modelo']
+            ano = input(f"⊳ Ano ({veiculo['ano']}): ") or veiculo['ano']
+            cor = input(f"⊳ Cor ({veiculo['cor']}): ") or veiculo['cor']
+            categoria = input(f"⊳ Categoria ({veiculo['categoria']}): ") or veiculo['categoria']
 
             veiculos[placa].update({
                 'marca': marca,
@@ -303,18 +302,18 @@ def alterarDadosVeic():
                 'cor': cor,
                 'categoria': categoria
             })
-            print(f"📋 Dados do veículo {modelo} atualizados com sucesso!")
+            print(f"\n📋 Dados do veículo {modelo} atualizados com sucesso!")
         else:
-            print("❌ Veículo não encontrado!")
+            print("\n❌ Veículo não encontrado!")
     else:
-        print("🚫 Ação não concluída!")
+        print("\n🚫 Ação não concluída!")
 
-    input("Tecle <ENTER> para continuar...")
+    input("\nTecle <ENTER> para continuar...")
 
 
 def excluirVeic():
     ifc.cabecalhoModulos("Excluir Veículo")
-    placa = input('⮕ Informe a placa do veículo: ').upper()
+    placa = input('❱ Informe a placa do veículo: ').upper()
     respExcluir = input("Deseja mesmo completar essa ação (Sim / Não)? ")
     if respExcluir.upper() == 'SIM':
         if placa in veiculos:
@@ -332,15 +331,16 @@ def excluirVeic():
 ############################################
 def modReserva():
     ifc.interface_reserva()
-    op_reserva = input("##### Escolha sua opção: ")
+    op_reserva = input("=====❱ Escolha sua opção: ")
     return op_reserva
 
 def reservarVeiculo():
     ifc.cabecalhoModulos("Reservar Veículo")
-    placa = input("⮕ Informe a placa do veículo a ser alugado: ").upper()
+    placa = input("❱ Informe a placa do veículo a ser alugado: ").upper()
     if placa in veiculos and not veiculos[placa]['alugado']:
-        dias = int(input("\n⮕ Por quantos dias o veículo será alugado? "))
+        dias = int(input("\n❱ Por quantos dias o veículo será alugado? "))
         data_inicio = datetime.now().strftime("%d/%m/%Y")
+        hora_inicio = datetime.now().strftime("%H:%M:%S")
         data_fim = (datetime.now() + timedelta(days=dias)).strftime("%d/%m/%Y")
         preco = valor_aluguel[veiculos[placa]['categoria']]
 
@@ -348,14 +348,22 @@ def reservarVeiculo():
         veiculos[placa]['data_inicio'] = data_inicio
         veiculos[placa]['data_fim'] = data_fim
 
-        nome_cliente = input("\n⮕ 👤 Informe o nome do cliente: ")
-        cpf_cliente = input("\n⮕ 🆔 CPF do cliente: ")
-        historico_aluguel[placa] = {
+        nome_cliente = input("\n❱ 👤 Informe o nome do cliente: ")
+        cpf_cliente = input("\n❱ 🆔 CPF do cliente: ")
+        
+        if placa not in historico_aluguel:
+            historico_aluguel[placa] = []
+
+        historico_aluguel[placa].append({
             'cpf_cliente': cpf_cliente,
             'nome_cliente': nome_cliente,
+            'data_inicio': data_inicio,
+            'hora_inicio': hora_inicio,
             'data_fim': data_fim,
+            'hora_fim': None,
             'status': True
-        }
+        })
+        
         print("\nPreço da diária: R$ ", preco)
         print(f"\n✅ Veículo {veiculos[placa]['modelo']} alugado com sucesso até {data_fim}!")
     else:
@@ -364,17 +372,20 @@ def reservarVeiculo():
 
 def devolverVeiculo():
     ifc.cabecalhoModulos("Devolver Veículo")
-    placa = input("⮕ Digite a placa do veículo a ser devolvido: ").upper()
+    placa = input("❱ Digite a placa do veículo a ser devolvido: ").upper()
     if placa in veiculos and veiculos[placa]['alugado']:
-        cpf_cliente = input("⮕ CPF do cliente: ")
+        cpf_cliente = input("❱ CPF do cliente: ")
         data_fim = datetime.now().strftime("%d/%m/%Y")
+        hora_fim = datetime.now().strftime("%H:%M:%S")
         veiculos[placa]['alugado'] = False
 
-        historico_aluguel[placa] = {
-            'cpf_cliente': cpf_cliente,
-            'data_fim': data_fim,
-            'status': False
-        }
+        for aluguel in historico_aluguel[placa]:
+            if aluguel['cpf_cliente'] == cpf_cliente and aluguel['status']:
+                aluguel['data_fim'] = data_fim
+                aluguel['hora_fim'] = hora_fim
+                aluguel['status'] = False
+                break
+        
         print(f"✅ Veículo {veiculos[placa]['modelo']} devolvido com sucesso!")
     else:
         print("🚫 Veículo não encontrado ou não está alugado.")
@@ -410,7 +421,13 @@ def veiculosAlugados():
             print("| %-19s "%dados['data_inicio'], end='')
             print("| %-20s "%dados['data_fim'], end='')
             if placa in historico_aluguel:
-                print("| %-35s |" %historico_aluguel[placa]['nome_cliente'])
+                # Encontrar o registro ativo (status True)
+                for aluguel in historico_aluguel[placa]:
+                    if aluguel['status']:
+                        print("| %-35s |" % aluguel['nome_cliente'])
+                        break
+                else:
+                    print("| %-35s |" % "Nome não encontrado")
             else:
                 print("| %-35s |" % "Não Informado")
             
@@ -428,7 +445,7 @@ def politicaCombustivel():
 #############################################
 def modRelatorio():
     ifc.interface_relatorio()
-    op_relatorio = input("##### Escolha sua opção: ")
+    op_relatorio = input("=====❱ Escolha sua opção: ")
     return op_relatorio 
 
 def lista_geral_clientes():
@@ -474,14 +491,7 @@ def lista_geral_veiculos():
     input("Tecle <ENTER> para continuar...") 
 
 def veiculos_mais_procurados():
-    os.system('clear' if os.name == 'posix' else 'cls')
-    print()
-    print("####################################################################################################")
-    print("#######################               Veículos Mais Procurados               #######################")
-    print("####################################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
-    print("|   Placa   |            Marca            |       Modelo       |       Ano       |       Cor       |")
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
+    ifc.interface_maisprocurados()
     #tranformar em comentário ctrl + /
     # lista_placas = alugueis_por_veiculo.keys()
     # lista_alugueis = alugueis_por_veiculo.values()
@@ -506,9 +516,16 @@ def veiculos_mais_procurados():
 
 def historicoAlugueis():
     ifc.interface_historico()
-    # placa = input("Informe a placa do veículo: ").upper()
-    # aluguel = historicoAlugueis[placa]
-    input("Tecle <ENTER> para continuifc.interface_clientes()ar...")
+    placa = input("❱ Informe a placa do veículo para ver o histórico: ").upper()
+    
+    if placa in historico_aluguel:
+        print(f"\n❱ Histórico de aluguéis para o veículo {placa}:")
+        for aluguel in sorted(historico_aluguel[placa], key=lambda x: datetime.strptime(x['data_inicio'], "%d/%m/%Y")):
+            print(f"\nCliente: {aluguel['nome_cliente']}, CPF: {aluguel['cpf_cliente']}, Início: {aluguel['data_inicio']} {aluguel['hora_inicio']}, Fim: {aluguel['data_fim']} {aluguel['hora_fim']}, Status: {'Ativo' if aluguel['status'] else 'Devolvido'}")
+    else:
+        print("🚫 Não há histórico de aluguéis para este veículo.")
+        
+    input("\nTecle <ENTER> para continuar...")
 
 ##############################################
 #####         Módulo Informações         #####    

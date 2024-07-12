@@ -84,7 +84,6 @@ while op_pric != '0':
   elif op_pric == '6':
     op_pric = funcoes.modInfo()
 
-print("Você encerrou o programa!")
-print("Até logo!")
+print("\nAté logo!")
 funcoes.escreverArquivos()
 
