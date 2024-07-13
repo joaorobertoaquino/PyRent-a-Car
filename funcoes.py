@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from dicionarios import clientes, funcionarios, veiculos, alugueis_por_veiculo, valor_aluguel, historico_aluguel
 import interfaces as ifc 
 import validacao as val
+from collections import Counter
 
 
 ########################################################
@@ -476,13 +477,12 @@ def lista_geral_funcionarios():
 def lista_geral_veiculos():
     os.system('clear' if os.name == 'posix' else 'cls')
     ifc.interface_listaveiculos()
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|------------------|-----------|")
     for placa, dados in veiculos.items():
             print("| %-9s "%placa, end='')
             print("| %-27s "%dados['marca'], end='')
             print("| %-18s "%dados['modelo'], end='')
-            print("| %-15s "%dados['ano'], end='')
-            print("| %-15s "%dados['cor'], end='')
+            print("| %-6s "%dados['ano'], end='')
+            print("| %-10s "%dados['cor'], end='')
             print("| %-9s "%dados['categoria'], end='')
             print("| %-16s "%dados['data_cadastro'], end='')
             print("| %-9s |"%dados['hora_cadastro'])
@@ -492,26 +492,23 @@ def lista_geral_veiculos():
 
 def veiculos_mais_procurados():
     ifc.interface_maisprocurados()
-    #tranformar em comentário ctrl + /
-    # lista_placas = alugueis_por_veiculo.keys()
-    # lista_alugueis = alugueis_por_veiculo.values()
-    # tam = len(lista_placas)
-    # for i in range(tam-1):
-    #     for j in range(i+1,tam):
-    #         if lista_alugueis[i]<lista_alugueis[j]:
-    #             variavelTemp = lista_alugueis[i]
-    #             lista_alugueis[i] = lista_alugueis[j]
-    #             lista_alugueis[j] = variavelTemp
-                
-    #             variavelTemp = lista_placas[i]
-    #             lista_placas[i] = lista_placas[j]
-    #             lista_placas[j] = variavelTemp
+    contador = Counter()
 
-    # print(lista_placas, end='')
-    # print(lista_alugueis)
-
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|")
-    print()
+    for placa, alugueis in historico_aluguel.items():
+        contador[placa] += len(alugueis)
+        
+    top10 = contador.most_common(10)
+    for placa, contagem in top10:
+        carro = veiculos[placa]
+        print("| %-9s "%placa, end='')
+        print("| %-27s "%carro['marca'], end='')
+        print("| %-8s "%carro['modelo'], end='')
+        print("| %-5s "%carro['ano'], end='')
+        print("| %-13s "%carro['cor'], end='')
+        print("| %-9s "%carro['categoria'], end='')
+        print("| %-10s |"%contagem)
+        print("|-----------|-----------------------------|----------|-------|---------------|-----------|------------|")
+        print()
     input("Tecle <ENTER> para continuar...")
 
 def historicoAlugueis():
@@ -527,13 +524,13 @@ def historicoAlugueis():
             print("| %-13s "%aluguel['cpf_cliente'], end='')
             print("| %-12s "%aluguel['data_inicio'], end='')
             print("| %-12s "%aluguel['hora_inicio'], end='')
-            print("| %-10s "%aluguel['data_fim'], end='')
+            print("| %-14s "%aluguel['data_fim'], end='')
             print("| %-14s "%aluguel['hora_fim'], end='')
             print("| %-10s |"%status)
             
     else:
         print("🚫 Não há histórico de aluguéis para este veículo.")
-    print("|---------|-------------------------------------|---------------|--------------|--------------|------------|----------------|------------|")
+    print("|---------|-------------------------------------|---------------|--------------|--------------|----------------|----------------|------------|")
     input("\nTecle <ENTER> para continuar...")
 
 ##############################################
