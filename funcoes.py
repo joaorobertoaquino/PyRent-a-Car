@@ -344,38 +344,45 @@ def reservarVeiculo():
         hora_inicio = datetime.now().strftime("%H:%M:%S")
         data_fim = (datetime.now() + timedelta(days=dias)).strftime("%d/%m/%Y")
         preco = valor_aluguel[veiculos[placa]['categoria']]
-
-        veiculos[placa]['alugado'] = True
-        veiculos[placa]['data_inicio'] = data_inicio
-        veiculos[placa]['data_fim'] = data_fim
-
+        
         nome_cliente = input("\n❱ 👤 Informe o nome do cliente: ")
         cpf_cliente = input("\n❱ 🆔 CPF do cliente: ")
+        cpf_cliente = val.formatar_cpf(cpf_cliente)
         
-        if placa not in historico_aluguel:
-            historico_aluguel[placa] = []
-
-        historico_aluguel[placa].append({
-            'cpf_cliente': cpf_cliente,
-            'nome_cliente': nome_cliente,
-            'data_inicio': data_inicio,
-            'hora_inicio': hora_inicio,
-            'data_fim': data_fim,
-            'hora_fim': None,
-            'status': True
-        })
-        
-        print("\nPreço da diária: R$ ", preco)
-        print(f"\n✅ Veículo {veiculos[placa]['modelo']} alugado com sucesso até {data_fim}!")
+        if cpf_cliente in clientes:
+            if clientes[cpf_cliente][0] == nome_cliente:
+                veiculos[placa]['alugado'] = True
+                veiculos[placa]['data_inicio'] = data_inicio
+                veiculos[placa]['data_fim'] = data_fim
+                
+                if placa not in historico_aluguel:
+                    historico_aluguel[placa] = []
+                historico_aluguel[placa].append({
+                    'cpf_cliente': cpf_cliente,
+                    'nome_cliente': nome_cliente,
+                    'data_inicio': data_inicio,
+                    'hora_inicio': hora_inicio,
+                    'data_fim': data_fim,
+                    'hora_fim': None,
+                    'status': True
+                })
+                print("\nPreço da diária: R$ ", preco)
+                print(f"\n✅ Veículo {veiculos[placa]['modelo']} alugado com sucesso até {data_fim}!")
+            else:
+                print("🚫 Nome do cliente não corresponde ao CPF informado.")
+        else:
+            print("🚫 Cliente não cadastrado.")
     else:
         print("🚫 Veículo não encontrado ou já está alugado.")
     input("\nTecle <ENTER> para continuar...")
-
+    
+    
 def devolverVeiculo():
     ifc.cabecalhoModulos("Devolver Veículo")
     placa = input("❱ Digite a placa do veículo a ser devolvido: ").upper()
     if placa in veiculos and veiculos[placa]['alugado']:
-        cpf_cliente = input("❱ CPF do cliente: ")
+        cpf_cliente = input("\n❱ CPF do cliente: ")
+        cpf_cliente = val.formatar_cpf(cpf_cliente)
         data_fim = datetime.now().strftime("%d/%m/%Y")
         hora_fim = datetime.now().strftime("%H:%M:%S")
         veiculos[placa]['alugado'] = False
@@ -387,10 +394,10 @@ def devolverVeiculo():
                 aluguel['status'] = False
                 break
         
-        print(f"✅ Veículo {veiculos[placa]['modelo']} devolvido com sucesso!")
+        print(f"\n✅ Veículo {veiculos[placa]['modelo']} devolvido com sucesso!")
     else:
-        print("🚫 Veículo não encontrado ou não está alugado.")
-    input("Tecle <ENTER> para continuar...")
+        print("\n🚫 Veículo não encontrado ou não está alugado.")
+    input("\nTecle <ENTER> para continuar...")
 
 
 def veiculosDisponiveis():
@@ -398,14 +405,14 @@ def veiculosDisponiveis():
     for placa, dados in veiculos.items():
         if not dados ['alugado']:
             print("| %-9s "%placa, end='')
-            print("| %-27s "%dados['marca'], end='')
+            print("| %-15s "%dados['marca'], end='')
             print("| %-18s "%dados['modelo'], end='')
-            print("| %-15s "%dados['ano'], end='')
+            print("| %-5s "%dados['ano'], end='')
             print("| %-15s "%dados['cor'], end='')
             print("| %-9s "%dados['categoria'], end='')
             print("| %-18s "%dados['data_cadastro'], end='')
             print("| %-16s |"%dados['hora_cadastro'])
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|--------------------|------------------|")
+    print("|-----------|-----------------|--------------------|-------|-----------------|-----------|--------------------|------------------|")
     print()
     input("Tecle <ENTER> para continuar...")
 
@@ -414,9 +421,9 @@ def veiculosAlugados():
     for placa, dados in veiculos.items():
         if dados['alugado']:
             print("| %-9s "%placa, end='')
-            print("| %-27s "%dados['marca'], end='')
+            print("| %-15s "%dados['marca'], end='')
             print("| %-18s "%dados['modelo'], end='')
-            print("| %-15s "%dados['ano'], end='')
+            print("| %-5s "%dados['ano'], end='')
             print("| %-15s "%dados['cor'], end='')
             print("| %-9s "%dados['categoria'], end='')
             print("| %-19s "%dados['data_inicio'], end='')
@@ -432,8 +439,7 @@ def veiculosAlugados():
             else:
                 print("| %-35s |" % "Não Informado")
             
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|---------------------|----------------------|-------------------------------------|")
-    print()
+    print("|-----------|-----------------|--------------------|-------|-----------------|-----------|---------------------|----------------------|-------------------------------------|")
     input("Tecle <ENTER> para continuar...")
 
 
@@ -481,19 +487,18 @@ def lista_geral_veiculos():
             print("| %-9s "%placa, end='')
             print("| %-27s "%dados['marca'], end='')
             print("| %-18s "%dados['modelo'], end='')
-            print("| %-6s "%dados['ano'], end='')
-            print("| %-10s "%dados['cor'], end='')
+            print("| %-7s "%dados['ano'], end='')
+            print("| %-15s "%dados['cor'], end='')
             print("| %-9s "%dados['categoria'], end='')
             print("| %-16s "%dados['data_cadastro'], end='')
             print("| %-9s |"%dados['hora_cadastro'])
-    print("|-----------|-----------------------------|--------------------|-----------------|-----------------|-----------|------------------|-----------|")
+    print("|-----------|-----------------------------|--------------------|---------|-----------------|-----------|------------------|-----------|")
     print()
     input("Tecle <ENTER> para continuar...") 
 
 def veiculos_mais_procurados():
     ifc.interface_maisprocurados()
     contador = Counter()
-
     for placa, alugueis in historico_aluguel.items():
         contador[placa] += len(alugueis)
         
@@ -517,20 +522,20 @@ def historicoAlugueis():
     placa = input("❱ Informe a placa do veículo para ver o histórico: ").upper()
     if placa in historico_aluguel:
         ifc.interface_historico()
-        for aluguel in sorted(historico_aluguel[placa], key=lambda x: datetime.strptime(x['data_inicio'], "%d/%m/%Y")):   
+        for aluguel in sorted(historico_aluguel[placa], key=lambda x: datetime.strptime(x['data_inicio'], "%d/%m/%Y")):  
+            hora = '--------------' if aluguel['status'] else aluguel['hora_fim']
             status = 'Ativo' if aluguel['status'] else 'Devolvido'
             print("| %-7s "%placa, end='')
             print("| %-35s "%aluguel['nome_cliente'], end='')
-            print("| %-13s "%aluguel['cpf_cliente'], end='')
+            print("| %-15s "%aluguel['cpf_cliente'], end='')
             print("| %-12s "%aluguel['data_inicio'], end='')
             print("| %-12s "%aluguel['hora_inicio'], end='')
             print("| %-14s "%aluguel['data_fim'], end='')
-            print("| %-14s "%aluguel['hora_fim'], end='')
+            print("| %-14s "%hora, end='')
             print("| %-10s |"%status)
-            
     else:
         print("🚫 Não há histórico de aluguéis para este veículo.")
-    print("|---------|-------------------------------------|---------------|--------------|--------------|----------------|----------------|------------|")
+    print("|---------|-------------------------------------|-----------------|--------------|--------------|----------------|----------------|------------|")
     input("\nTecle <ENTER> para continuar...")
 
 ##############################################
