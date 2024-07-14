@@ -1,7 +1,7 @@
 import os
 import pickle
 from datetime import datetime, timedelta
-from dicionarios import clientes, funcionarios, veiculos, alugueis_por_veiculo, valor_aluguel, historico_aluguel
+from dicionarios import clientes, funcionarios, veiculos, valor_aluguel, historico_aluguel
 import interfaces as ifc 
 import validacao as val
 from collections import Counter
@@ -22,10 +22,6 @@ def escreverArquivos():
     arq_veiculos = open("veiculos.dat", "wb")
     pickle.dump(veiculos, arq_veiculos)
     arq_veiculos.close()
-
-    arq_alugueis_por_veiculo = open("alugueis_por_veiculo.dat", "wb")
-    pickle.dump(alugueis_por_veiculo, arq_alugueis_por_veiculo)
-    arq_alugueis_por_veiculo.close()
 
     arq_historico_aluguel = open("historico_aluguel.dat", "wb")
     pickle.dump(historico_aluguel, arq_historico_aluguel)

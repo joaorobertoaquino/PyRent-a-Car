@@ -36,10 +36,6 @@ historico_aluguel = {
     ]
 }
 
-alugueis_por_veiculo = {
-  "FGH4D29": 5,
-}  # Dicionário para contar o número de alugueis de cada veículo. 
-
 valor_aluguel = {
   "A" : 120.00,
   "B" : 150.00
@@ -80,12 +76,4 @@ try:
 except:
   arq_veiculos= open("veiculos_.dat", "wb")
 arq_veiculos.close()
-
-alugueis_por_veiculo={}
-try:
-  arq_alugueis_por_veiculo = open("alugueis_por_veiculo.dat", "rb")
-  alugueis_por_veiculo = pickle.load(arq_alugueis_por_veiculo)
-except:
-  arq_alugueis_por_veiculo = open("alugeuis_por_veiculo.dat", "wb")
-arq_alugueis_por_veiculo.close()
 
