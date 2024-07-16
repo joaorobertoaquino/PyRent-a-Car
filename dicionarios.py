@@ -51,7 +51,7 @@ try:
   historico_aluguel = pickle.load(arq_historico_aluguel)
 except:
   arq_historico_aluguel = open("historico_aluguel.dat", "wb")
-  arq_historico_aluguel.close()
+arq_historico_aluguel.close()
 
 clientes = {}
 try:
@@ -59,7 +59,7 @@ try:
   clientes = pickle.load(arq_clientes)
 except:
   arq_clientes = open("clientes.dat", "wb")
-  arq_clientes.close()
+arq_clientes.close()
 
 funcionarios = {}
 try:
