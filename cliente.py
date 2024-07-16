@@ -3,9 +3,9 @@ import interfaces as ifc
 import validacao as val
 from datetime import datetime
 
-########################
-#####   Cadastrar  #####
-########################
+#########################
+#####   Cadastrar   #####
+#########################
 def cadastrarCliente():
   ifc.cabecalhoModulos("Cadastrar Cliente")
   nome = input("👤 Nome: ")
@@ -26,9 +26,9 @@ def cadastrarCliente():
   print("✅ Cliente cadastrado com sucesso!")
   input("Tecle <ENTER> para continuar...")
 
-########################
-#####     Exibir   #####
-########################
+#########################
+#####     Exibir    #####
+#########################
 def exibirDadosCliente():
   ifc.cabecalhoModulos("Exibir Dados do Cliente")
   cpf = input('❱ Qual o CPF do cliente? ')
@@ -45,9 +45,9 @@ def exibirDadosCliente():
   print()
   input("Tecle <ENTER> para continuar...")
 
-########################
-#####    Alterar   #####
-########################
+#########################
+#####    Alterar    #####
+#########################
 def alterarDadosCliente():
   ifc.cabecalhoModulos("Alterar Dados do Cliente")
   cpf = input('❱ Qual o CPF do Cliente? ')
@@ -77,9 +77,9 @@ def alterarDadosCliente():
 
   input(" Tecle <ENTER> para continuar...")
 
-########################
-#####    Excluir   #####
-########################
+#########################
+#####    Excluir    #####
+#########################
 def excluirCliente():
   ifc.cabecalhoModulos("Excluir Cliente")
   cpf = input('_ Informe o CPF do cliente: ')
