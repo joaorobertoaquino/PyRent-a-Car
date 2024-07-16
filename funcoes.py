@@ -376,21 +376,27 @@ def reservarVeiculo():
 def devolverVeiculo():
     ifc.cabecalhoModulos("Devolver Veículo")
     placa = input("❱ Digite a placa do veículo a ser devolvido: ").upper()
+    
     if placa in veiculos and veiculos[placa]['alugado']:
-        cpf_cliente = input("\n❱ CPF do cliente: ")
+        cpf_cliente = input("❱ CPF do cliente: ")
         cpf_cliente = val.formatar_cpf(cpf_cliente)
         data_fim = datetime.now().strftime("%d/%m/%Y")
         hora_fim = datetime.now().strftime("%H:%M:%S")
-        veiculos[placa]['alugado'] = False
-
+        
+        devolucao_valida = False
         for aluguel in historico_aluguel[placa]:
             if aluguel['cpf_cliente'] == cpf_cliente and aluguel['status']:
+                devolucao_valida = True
                 aluguel['data_fim'] = data_fim
                 aluguel['hora_fim'] = hora_fim
                 aluguel['status'] = False
+                veiculos[placa]['alugado'] = False
                 break
-        
-        print(f"\n✅ Veículo {veiculos[placa]['modelo']} devolvido com sucesso!")
+            
+        if devolucao_valida:
+            print(f"\n✅ Veículo {veiculos[placa]['modelo']} devolvido com sucesso!")
+        else:
+            print("\n🚫 CPF não corresponde ao cliente que alugou o veículo.")
     else:
         print("\n🚫 Veículo não encontrado ou não está alugado.")
     input("\nTecle <ENTER> para continuar...")
