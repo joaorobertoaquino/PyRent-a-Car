@@ -3,6 +3,7 @@ import cliente
 import funcionario
 import veiculo
 import reserva
+import relatorio 
 
 ##########################################
 #####  Locadora de Carros - Crystal  #####
@@ -75,15 +76,15 @@ while op_pric != '0':
       op_relatorio = funcoes.modRelatorio()
 
       if op_relatorio == '1':
-        funcoes.lista_geral_clientes()
+        relatorio.lista_geral_clientes()
       elif op_relatorio == '2':
-        funcoes.lista_geral_funcionarios()
+        relatorio.lista_geral_funcionarios()
       elif op_relatorio == '3':
-        funcoes.lista_geral_veiculos()
+        relatorio.lista_geral_veiculos()
       elif op_relatorio == '4':
-        funcoes.veiculos_mais_procurados()
+        relatorio.veiculos_mais_procurados()
       elif op_relatorio == '5':
-        funcoes.historicoAlugueis()
+        relatorio.historicoAlugueis()
 
   elif op_pric == '6':
     op_pric = funcoes.modInfo()
