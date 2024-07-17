@@ -1,6 +1,7 @@
 import funcoes
 import cliente
 import funcionario
+import veiculo
 
 ##########################################
 #####  Locadora de Carros - Crystal  #####
@@ -43,13 +44,13 @@ while op_pric != '0':
       op_veic = funcoes.modVeic()
 
       if op_veic == '1':
-        funcoes.cadastrarVeic()
+        veiculo.cadastrarVeic()
       elif op_veic == '2':
-        funcoes.exibirDadosVeic()
+        veiculo.exibirDadosVeic()
       elif op_veic == '3':
-        funcoes.alterarDadosVeic()
+        veiculo.alterarDadosVeic()
       elif op_veic == '4':
-        funcoes.excluirVeic()
+        veiculo.excluirVeic()
 
   elif op_pric == '4':
     op_reserva = ''
