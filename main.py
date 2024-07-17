@@ -2,6 +2,7 @@ import funcoes
 import cliente
 import funcionario
 import veiculo
+import reserva
 
 ##########################################
 #####  Locadora de Carros - Crystal  #####
@@ -58,15 +59,15 @@ while op_pric != '0':
       op_reserva = funcoes.modReserva()
       
       if op_reserva == '1':
-        funcoes.reservarVeiculo()
+        reserva.reservarVeiculo()
       elif op_reserva == '2':
-        funcoes.devolverVeiculo()
+        reserva.devolverVeiculo()
       elif op_reserva == '3':
-        funcoes.veiculosDisponiveis()
+        reserva.veiculosDisponiveis()
       elif op_reserva == '4':
-        funcoes.veiculosAlugados()
+        reserva.veiculosAlugados()
       elif op_reserva == '5':
-        funcoes.politicaCombustivel()
+        reserva.politicaCombustivel()
 
   elif op_pric == '5':
     op_relatorio = ''
