@@ -1,6 +1,7 @@
 from dicionarios import veiculos
 import interfaces as ifc 
 from datetime import datetime
+from funcoes import ler_ano_veiculo,ler_placa_veiculo
 
 #########################
 #####   Cadastrar   #####
@@ -11,11 +12,11 @@ def cadastrarVeic():
     print()
     modelo = input("⊳ Modelo: ")
     print()
-    ano = input("⊳ Ano de lançamento: ")
+    ano = ler_ano_veiculo()
     print()
     cor = input("⊳ Cor: ")
     print()
-    placa = input("⊳ Número da placa: ").upper()
+    placa = ler_placa_veiculo()
     print()
     categoria = input("⊳ Informe a categoria do carro: ")
     print()

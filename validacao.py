@@ -1,17 +1,14 @@
 import re
 from datetime import datetime
 
+##################################### 
+#####         Formatar          #####  
+#####################################
 def formatar_cpf(cpf):
     # Remove caracteres não numéricos
     cpf = cpf.replace(".", "").replace("-", "")
     # Adiciona a formatação
     return f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
-
-def formatar_data(data):
-    # Remove caracteres não numéricos
-    data = data.replace("/", "")
-    # Adiciona a formatação
-    return f"{data[:2]}/{data[2:4]}/{data[4:]}"
 
 def formatar_telefone(telefone):
     # Remove caracteres não numéricos
@@ -20,6 +17,9 @@ def formatar_telefone(telefone):
     return f"({telefone[:2]}) {telefone[2:7]}-{telefone[7:]}"
 
 
+##################################### 
+#####         Validar           #####  
+#####################################
 def validar_cpf(cpf):
     cpf = ''.join(filter(str.isdigit, cpf))
     if len(cpf) != 11 or cpf == cpf[0] * 11:
@@ -52,39 +52,27 @@ def validar_cpf(cpf):
     # Se passar por todas as verificações, o CPF é válido
     return True
 
+
 def validar_email(email):
     regex_email = r"([a-zA-Z0-9\.\-\_]{2,})@([a-zA-Z0-9]{2,})(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?(\.[a-z]{2,})?"
     if not re.match(regex_email, email):
         return False
     return True
 
+
 def validar_nome(nome):
-    # Expressão regular para validar um nome abrangente
-    name_regex = (
+    # Expressão regular para nomes
+    regex_nome = (
         r"^["
-        r"\p{L}"        # Qualquer letra unicode
-        r"\p{M}"        # Marcas de acentuação
-        r"'\- "         # Apóstrofos, hífens e espaços
+        r"A-Za-zÀ-ÖØ-öø-ÿ"  # Letras maiúsculas e minúsculas, incluindo caracteres acentuados
+        r"'\- "             # Apóstrofos, hífens e espaços
         r"]+$"
     )
-    return re.match(name_regex, nome, re.UNICODE) is not None
-
-#     "João da Silva",
-#     "Marie Curie",
-#     "Anne-Marie",
-#     "O'Connor",
-#     "Lucas123",        # Inválido (contém números)
-#     "Maria Clara!",    # Inválido (contém caractere especial)
-#     "José",
-#     "Ñandú",
-#     "李四",            # Nome em caracteres chineses
-#     "Иван Иванович",   # Nome em caracteres cirílicos
-#     "Ólafur Ragnar",   # Nome com acentuação islandesa
-#     "D'Angelo",        # Nome com apóstrofo
-#     "Jean-Luc",        # Nome com hífen
-#     "Renée",           # Nome com acento
-#     "Søren Kierkegaard", # Nome com caracteres escandinavos
-#     "El Niño",         # Nome com espaço e tilde
+    
+    # Verifica se o nome corresponde ao padrão
+    if re.fullmatch(regex_nome, nome):
+        return True
+    return False
 
 
 def validar_Datanascimento(dataNascimento):
@@ -93,7 +81,7 @@ def validar_Datanascimento(dataNascimento):
         birthdate = datetime.strptime(dataNascimento, '%d/%m/%Y')
     except ValueError:
         # Retorna falso se a data estiver em formato inválido
-        return False, "Data inválida."
+        return False, "Data inválida. Utlize o caractere '/' idêntico ao formato a seguir: (00/00/0000)"
 
     # Obtém a data atual
     today = datetime.today()
@@ -111,9 +99,33 @@ def validar_Datanascimento(dataNascimento):
 
     return True, "Data de nascimento válida."
 
-def is_valid_license_plate(plate):
+
+def validar_placa(placa):
     # Expressão regular para os dois formatos de placas no Brasil
-    old_plate_regex = r'^[A-Z]{3}-[0-9]{4}$'    # Formato antigo: ABC-1234
-    new_plate_regex = r'^[A-Z]{3}[0-9][A-Z][0-9]{2}$'  # Formato novo: ABC1D23
+    placa_antiga_regex = r'^[A-Z]{3}-[0-9]{4}$'    # Formato antigo: ABC-1234
+    placa_atual_regex = r'^[A-Z]{3}[0-9][A-Z][0-9]{2}$'  # Formato novo: ABC1D23
     
-    return r
+    return re.match(placa_antiga_regex, placa) is not None or re.match(placa_atual_regex, placa) is not None
+
+
+def validar_telefone(fone):
+    fone = ''.join(filter(str.isdigit, fone))
+    regex_tel = r'([0-9]{11}\b)'
+    if not re.match(regex_tel, fone):
+        return False
+    return True
+
+def validar_ano_veiculo(ano):
+    # Remove caracteres não numéricos
+    ano = ''.join(filter(str.isdigit, ano))
+    
+    # Verifica se o ano tem exatamente 4 dígitos e está no intervalo válido
+    if len(ano) == 4 and ano.isdigit():
+        ano_int = int(ano)
+        # Define um intervalo razoável para o ano do veículo
+        ano_atual = datetime.now().year
+        if 1886 <= ano_int <= ano_atual:
+            return True
+    return False
+
+#1886 marca o início da produção de automóveis, tornando-o um ano lógico para definir o início da era automotiva.

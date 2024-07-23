@@ -2,24 +2,22 @@ from dicionarios import clientes
 import interfaces as ifc 
 import validacao as val
 from datetime import datetime
+import funcoes
 
 #########################
 #####   Cadastrar   #####
 #########################
 def cadastrarCliente():
     ifc.cabecalhoModulos("Cadastrar Cliente")
-    nome = input("👤 Nome: ")
+    nome = funcoes.ler_nome()
     print()
-    cpf = input("🆔 CPF: ")
-    cpf = val.formatar_cpf(cpf)
+    cpf = funcoes.ler_cpf()
     print()
-    email = input("📧 Email: ")
+    email = funcoes.ler_email()
     print()
-    fone = input("📞 Celular: ")
-    fone = val.formatar_telefone(fone)
+    fone = funcoes.ler_telefone()
     print()
-    dataNascimento = input("🎂 Data de nascimento (00/00/0000): ")
-    dataNascimento = val.formatar_data(dataNascimento)
+    dataNascimento = funcoes.ler_data_nascimento()
     print()
     data = datetime.now()
     clientes[cpf] = [nome,email,fone,dataNascimento, data.strftime("%x, %X")]
@@ -50,25 +48,31 @@ def exibirDadosCliente():
 #########################
 def alterarDadosCliente():
     ifc.cabecalhoModulos("Alterar Dados do Cliente")
-    cpf = input('❱ Qual o CPF do Cliente? ')
+    cpf = input('❱ Qual o CPF do Cliente? ').strip()
     cpf = val.formatar_cpf(cpf)
+    
     if cpf in clientes:
         dadosCliente = clientes[cpf]
         print("\n❱ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
+        
         nome = input(f"\n👤 Nome ({dadosCliente[0]}): ").strip()
-        email = input(f"📧 Email ({dadosCliente[1]}): ").strip()
-        fone = input(f"📞 Celular ({dadosCliente[2]}): ").strip()
-        dataNascimento = input(f"🎂 Data de Nascimento ({dadosCliente[3]}): ").strip()
-        # Atualiza apenas os campos que não estão vazios, permitindo que a informação anterior continue a mesma.
         if nome:
+            nome = funcoes.ler_nome()
             clientes[cpf][0] = nome
+        
+        email = input(f"📧 Email ({dadosCliente[1]}): ").strip()
         if email:
+            email = funcoes.ler_email()
             clientes[cpf][1] = email
+        
+        fone = input(f"📞 Celular ({dadosCliente[2]}): ").strip()
         if fone:
-            fone = val.formatar_telefone(fone)
+            fone = funcoes.ler_telefone()
             clientes[cpf][2] = fone
+        
+        dataNascimento = input(f"🎂 Data de Nascimento ({dadosCliente[3]}): ").strip()
         if dataNascimento:
-            dataNascimento = val.formatar_data(dataNascimento)
+            dataNascimento = funcoes.ler_data_nascimento()
             clientes[cpf][3] = dataNascimento
 
         print('\n📋 Dados alterados com sucesso!')
