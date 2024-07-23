@@ -9,11 +9,11 @@ def lista_geral_clientes():
   for cpf in clientes:
       print("| %-15s "%(cpf), end='')
       print("| %-35s "%(clientes[cpf][0]), end='')
-      print("| %-34s "%(clientes[cpf][1]), end='')
+      print("| %-38s "%(clientes[cpf][1]), end='')
       print("| %-15s "%(clientes[cpf][2]), end='')
       print("| %-20s "%(clientes[cpf][3]), end='')
       print("| %-20s |"%(clientes[cpf][4]))
-  print("|-----------------|-------------------------------------|------------------------------------|-----------------|----------------------|----------------------|")
+  print("|-----------------|-------------------------------------|----------------------------------------|-----------------|----------------------|----------------------|")
   input("Tecle <ENTER> para continuar...")
 
 def lista_geral_funcionarios():
@@ -51,7 +51,7 @@ def veiculos_mais_procurados():
   for placa, alugueis in historico_aluguel.items():
       contador[placa] += len(alugueis)
 
-  top10 = contador.most_common(10)
+  top10 = contador.most_common(10) #aprendi na no canal do youtube "Faculdados"
   for placa, contagem in top10:
       carro = veiculos[placa]
       print("| %-9s "%placa, end='')
@@ -62,7 +62,6 @@ def veiculos_mais_procurados():
       print("| %-9s "%carro['categoria'], end='')
       print("| %-10s |"%contagem)
       print("|-----------|-----------------------------|----------|-------|---------------|-----------|------------|")
-      print()
   input("Tecle <ENTER> para continuar...")
 
 def historicoAlugueis():
@@ -71,7 +70,7 @@ def historicoAlugueis():
   placa = input("❱ Informe a placa do veículo para ver o histórico: ").upper()
   if placa in historico_aluguel:
       ifc.interface_historico()
-      for aluguel in sorted(historico_aluguel[placa], key=lambda x: datetime.strptime(x['data_inicio'], "%d/%m/%Y")):  
+      for aluguel in sorted(historico_aluguel[placa], key=lambda x: datetime.strptime(x['data_inicio'], "%d/%m/%Y")):  #ajudinha do Chata GPT
           hora = '--------------' if aluguel['status'] else aluguel['hora_fim']
           status = 'Ativo' if aluguel['status'] else 'Devolvido'
           print("| %-7s "%placa, end='')

@@ -2,6 +2,7 @@ from dicionarios import veiculos
 import interfaces as ifc 
 from datetime import datetime
 from funcoes import ler_ano_veiculo,ler_placa_veiculo
+import validacao as val
 
 #########################
 #####   Cadastrar   #####
@@ -71,7 +72,16 @@ def alterarDadosVeic():
             print("\n❱ Deixe o campo em branco para não alterar a informação.")
             marca = input(f"⊳ Marca ({veiculo['marca']}): ") or veiculo['marca']
             modelo = input(f"⊳ Modelo ({veiculo['modelo']}): ") or veiculo['modelo']
-            ano = input(f"⊳ Ano ({veiculo['ano']}): ") or veiculo['ano']
+            
+            ano = input(f"⊳ Ano ({veiculo['ano']}): ")
+            if ano:
+                while not val.validar_ano_veiculo(ano):
+                    print("==⊳ Ops! Ano inválido!")
+                    print("==⊳ O ano deve ser um número de quatro dígitos entre 1886 e o ano atual.")
+                    ano = input(f"⊳ Ano ({veiculo['ano']}): ")
+            else:
+                ano = veiculo['ano']
+            
             cor = input(f"⊳ Cor ({veiculo['cor']}): ") or veiculo['cor']
             categoria = input(f"⊳ Categoria ({veiculo['categoria']}): ") or veiculo['categoria']
 

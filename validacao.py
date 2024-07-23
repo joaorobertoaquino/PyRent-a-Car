@@ -1,6 +1,7 @@
 import re
 from datetime import datetime
 
+#parte desse código foi reaproveitado de Diana Rodrigues. Link git: https://github.com/dianaRodriguess/validacoes.git
 ##################################### 
 #####         Formatar          #####  
 #####################################
@@ -126,6 +127,6 @@ def validar_ano_veiculo(ano):
         ano_atual = datetime.now().year
         if 1886 <= ano_int <= ano_atual:
             return True
-    return False
+    return False #feito pelo chat GPT
 
 #1886 marca o início da produção de automóveis, tornando-o um ano lógico para definir o início da era automotiva.

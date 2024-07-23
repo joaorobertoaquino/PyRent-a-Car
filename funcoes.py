@@ -1,7 +1,7 @@
 
 import pickle
 import interfaces as ifc 
-from dicionarios import clientes, veiculos, historico_aluguel, funcionarios
+from dicionarios import clientes, veiculos, historico_aluguel, funcionarios, valor_aluguel
 import validacao as val
 import validacao as val
 
@@ -115,25 +115,28 @@ def ler_placa_veiculo():
     return placa
 
 def ler_cpf():
-    cpf = input("🆔 CPF: ")
-    cpf = val.formatar_cpf(cpf)
+    cpf = input("🆔 CPF: ").strip()
+    cpf_formatado = val.formatar_cpf(cpf)
     while not val.validar_cpf(cpf):
         print("==⊳ Ops! CPF inválido!")
         print("==⊳ Tente novamente...")
         print()
-        cpf = input("🆔 CPF: ")
-    return cpf
+        cpf = input("🆔 CPF: ").strip()
+        cpf_formatado = val.formatar_cpf(cpf)
+    return cpf_formatado
 
 def ler_telefone():
-    fone = input("📞 Celular: ")
-    fone = val.formatar_telefone(fone)
-    while not val.validar_telefone(fone):
+    fone = input("📞 Celular: ").strip()
+    fone_formatado = val.formatar_telefone(fone)
+    while not val.validar_telefone(fone_formatado):
         print("==⊳ Ops! O telefone informado é inválido!")
         print("Utilize o modelo a seguir como exemplo: '+55 12 34567-8901' ou '12 3456-7890'")
         print("==⊳ Tente novamente...")
         print()
-        fone = input("📞 Celular: ")
-    return fone
+        fone = input("📞 Celular: ").strip()
+        fone_formatado = val.formatar_telefone(fone)
+    return fone_formatado
+
 
 def ler_ano_veiculo():
     ano = input("⊳ Ano de lançamento: ")

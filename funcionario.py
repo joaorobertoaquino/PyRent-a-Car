@@ -2,23 +2,22 @@ from dicionarios import funcionarios
 import interfaces as ifc 
 import validacao as val
 from datetime import datetime
+import funcoes
 
 #########################
 #####   Cadastrar   #####
 #########################
 def cadastrarFunc():
     ifc.cabecalhoModulos("Cadastrar Funcionário")
-    nome = input("👤 Nome: ")
+    nome = funcoes.ler_nome()
     print()
-    cpf = input("🆔 CPF: ")
-    cpf = val.formatar_cpf(cpf)
+    cpf = funcoes.ler_cpf()
     print()
-    email = input("📧 Email: ")
+    email = funcoes.ler_email()
     print()
-    fone = input("📞 Celular: ")
+    fone = funcoes.ler_telefone()
     print()
-    dataNascimento = input("🎂 Data de Nascimento (00/00/0000): ")
-    dataNascimento = val.formatar_data(dataNascimento)
+    dataNascimento = funcoes.ler_data_nascimento()
     print()
     data = datetime.now()
     funcionarios[cpf] = [nome,email,fone,dataNascimento,data.strftime("%x, %X")]
@@ -48,30 +47,39 @@ def exibirDadosFunc():
 #####    Alterar    #####
 #########################
 def alterarDadosFunc():
-    ifc.cabecalhoModulos("Alterar Dados do Funcionário")
-    cpf = input('❱ Qual o CPF do funcionário(a)? ')
+    ifc.cabecalhoModulos("Alterar Dados do Cliente")
+    cpf = input('❱ Qual o CPF do Cliente? ').strip()
     cpf = val.formatar_cpf(cpf)
+    
     if cpf in funcionarios:
-        dadosFuncionarios = funcionarios[cpf]
-        print("❱ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
-        nome = input(f"👤 Nome ({dadosFuncionarios[0]}: )").strip()
-        email = input(f"📧 Email ({dadosFuncionarios[1]}): ").strip()
-        fone = input(f"📞 Celular ({dadosFuncionarios[2]}): ").strip()
-        dataNascimento = input(f"🎂 Data de Nascimento ({dadosFuncionarios[3]}): ").strip()
-        # Atualiza apenas os campos que não estão vazios, permitindo que a informação anterior continue a mesma.
+        dadosCliente = funcionarios[cpf]
+        print("\n❱ Informe os novos dados ou deixe o campo em branco para não alterar a informação.")
+        
+        nome = input(f"\n👤 Nome ({dadosCliente[0]}): ").strip()
         if nome:
+            nome = funcoes.ler_nome()
             funcionarios[cpf][0] = nome
+
+        email = input(f"📧 Email ({dadosCliente[1]}): ").strip()
         if email:
+            email = funcoes.ler_email()
             funcionarios[cpf][1] = email
+        
+        fone = input(f"📞 Celular ({dadosCliente[2]}): ").strip()
         if fone:
+            fone = funcoes.ler_telefone()
             funcionarios[cpf][2] = fone
+        
+        dataNascimento = input(f"🎂 Data de Nascimento ({dadosCliente[3]}): ").strip()
         if dataNascimento:
+            dataNascimento = funcoes.ler_data_nascimento()
             funcionarios[cpf][3] = dataNascimento
 
-        print('\n✅ Dados alterados com sucesso!')
+        print('\n📋 Dados alterados com sucesso!')
     else:
-        print('\n❌ Funcionário(a) inexistente!')
+        print('\n❌ Cliente inexistente!')
 
+    input(" Tecle <ENTER> para continuar...")
     input("Tecle <ENTER> para continuar...")
 
 #########################

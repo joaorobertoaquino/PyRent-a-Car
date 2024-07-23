@@ -37,9 +37,20 @@ historico_aluguel = {
 }
 
 valor_aluguel = {
-  "A" : 120.00,
-  "B" : 150.00
-} #Dicionário para contar os números de vezes que os veículos fora, alugados.
+  "seda": 120.00,
+  "suv": 150.00,
+  "hatch": 100.00,
+  "pickup": 200.00,
+  "crossover": 140.00,
+  "perua": 130.00,
+  "conversivel": 250.00,
+  "coupe": 180.00,
+  "minivan": 160.00,
+  "van": 180.00,
+  "esportivo": 300.00,
+  "eletrico": 220.00,
+  "hibrido": 200.00
+}
 
 #########################################################
 #####            Carregar Dados                     #####
