@@ -11,35 +11,34 @@ def reservarVeiculo():
         data_inicio = datetime.now().strftime("%d/%m/%Y") #informações retiradas de um site chamado Programix
         hora_inicio = datetime.now().strftime("%H:%M:%S")
         data_fim = (datetime.now() + timedelta(days=dias)).strftime("%d/%m/%Y")
-        preco = valor_aluguel[veiculos[placa]['categoria']]
+        preco_diaria = valor_aluguel[veiculos[placa]['categoria']]
+        total_a_pagar = preco_diaria * dias
 
-        nome_cliente = input("\n❱ 👤 Informe o nome do cliente: ")
         cpf_cliente = input("\n❱ 🆔 CPF do cliente: ")
         cpf_cliente = val.formatar_cpf(cpf_cliente)
-
+                
         if cpf_cliente in clientes:
-            if clientes[cpf_cliente][0] == nome_cliente:
-                veiculos[placa]['alugado'] = True
-                veiculos[placa]['data_inicio'] = data_inicio
-                veiculos[placa]['data_fim'] = data_fim
+            nome_cliente = clientes[cpf_cliente][0]
+            veiculos[placa]['alugado'] = True
+            veiculos[placa]['data_inicio'] = data_inicio
+            veiculos[placa]['data_fim'] = data_fim
 
-                if placa not in historico_aluguel:
-                    historico_aluguel[placa] = []
-                historico_aluguel[placa].append({
-                    'cpf_cliente': cpf_cliente,
-                    'nome_cliente': nome_cliente,
-                    'data_inicio': data_inicio,
-                    'hora_inicio': hora_inicio,
-                    'data_fim': data_fim,
-                    'hora_fim': None,
-                    'status': True
-                })
-                print("\nPreço da diária: R$ ", preco)
-                print(f"\n✅ Veículo {veiculos[placa]['modelo']} alugado com sucesso até {data_fim}!")
-            else:
-                print("🚫 Nome do cliente não corresponde ao CPF informado.")
+            if placa not in historico_aluguel:
+                historico_aluguel[placa] = []
+            historico_aluguel[placa].append({
+                'cpf_cliente': cpf_cliente,
+                'nome_cliente': nome_cliente,
+                'data_inicio': data_inicio,
+                'hora_inicio': hora_inicio,
+                'data_fim': data_fim,
+                'hora_fim': None,
+                'status': True
+            })
+            print("\n❥Preço da diária: R$ ", preco_diaria)
+            print(f"\n❥Total a pagar por {dias} dias: R$ ", total_a_pagar)
+            print(f"\n✅ Veículo {veiculos[placa]['modelo']} alugado com sucesso até {data_fim}!")
         else:
-            print("🚫 Cliente não cadastrado.")
+            print("🚫 Cliente não cadastrado, ou CPF não válido.")
     else:
         print("🚫 Veículo não encontrado ou já está alugado.")
     input("\nTecle <ENTER> para continuar...")

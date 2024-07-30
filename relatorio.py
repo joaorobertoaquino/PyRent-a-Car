@@ -61,7 +61,7 @@ def veiculos_mais_procurados():
       print("| %-13s "%carro['cor'], end='')
       print("| %-9s "%carro['categoria'], end='')
       print("| %-10s |"%contagem)
-      print("|-----------|-----------------------------|----------|-------|---------------|-----------|------------|")
+  print("|-----------|-----------------------------|----------|-------|---------------|-----------|------------|")
   input("Tecle <ENTER> para continuar...")
 
 def historicoAlugueis():
